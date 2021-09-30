@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-if="show">transition效果</div>
+    <div v-show="show">transition效果</div>
   </transition>
 </template>
 <script>

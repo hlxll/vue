@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div id="app">
+    <Provide />
     <div id="modals">{{ reposituries }}</div>
     <button @click="changeRep()">改变</button>
     <AsyncComponent v-on:close="changeAsync" v-if="showAsync" />
+    <router-view></router-view>
   </div>
 </template>
 
@@ -16,9 +18,11 @@ import {
   ref,
   watch,
 } from "vue";
+import Provide from "./components/Provide.vue";
 export default {
   name: "App",
   components: {
+    Provide,
     AsyncComponent: defineAsyncComponent(() =>
       import("./components/AsyncComponent.vue")
     ),
