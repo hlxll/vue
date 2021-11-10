@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <Provide />
-    <div id="modals">{{ reposituries }}</div>
+    <div id="modals" v-my-directive>{{ reposituries }}</div>
     <button @click="changeRep()">改变</button>
     <AsyncComponent v-on:close="changeAsync" v-if="showAsync" />
+    <!-- 混入其他组件数据 -->
+    <span v-myDirective="'huanglin'">混入：{{ mergeChild }}</span>
     <router-view></router-view>
   </div>
 </template>
@@ -21,6 +23,7 @@ import {
 import Provide from "./components/Provide.vue";
 export default {
   name: "App",
+  mixins: [Provide],
   components: {
     Provide,
     AsyncComponent: defineAsyncComponent(() =>
@@ -59,13 +62,13 @@ export default {
   },
   data() {
     return {
-      name: "",
       showAsync: true,
     };
   },
   mounted() {},
   methods: {
     changeRep() {
+      console.log(this.$options);
       this.reposituries = "新ref函数创建响应式变量，可以在任何地方使用";
     },
     changeAsync() {

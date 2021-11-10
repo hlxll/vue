@@ -1,5 +1,6 @@
 <template>
   <button @click="close">关闭</button>
+  <span>{{ name }}</span>
   <div>
     <div style="height: 1000px" @click="updateLocation()">动态加载</div>
     <div id="scrollTopMove">滚动</div>
