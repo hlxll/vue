@@ -58,6 +58,7 @@ export default {
   },
   methods: {
     changeShow() {
+      console.log(this.$parent.showAsync);
       this.show = !this.show;
     },
   },

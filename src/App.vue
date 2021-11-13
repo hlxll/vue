@@ -6,6 +6,7 @@
     <AsyncComponent v-on:close="changeAsync" v-if="showAsync" />
     <!-- 混入其他组件数据 -->
     <span v-myDirective="'huanglin'">混入：{{ mergeChild }}</span>
+    <p>provide和inject{{ user }}</p>
     <router-view></router-view>
   </div>
 </template>
@@ -23,7 +24,16 @@ import {
 import Provide from "./components/Provide.vue";
 export default {
   name: "App",
+  inject: ["user"],
+  //子组件设置inheritAttrs，子组件没有设置props时候，判断子组件是否继承父组件props传递的属性
+  inheritAttrs: true,
   mixins: [Provide],
+  //组件通过ref或者parent或者$root可以访问该组件的数据和方法，但是添加expose限制，定义的才可以被
+  //其他组件访问
+  expose: ["showAsync"],
+  renderTracked({ key, target, type }) {
+    console.log({ key, target, type });
+  },
   components: {
     Provide,
     AsyncComponent: defineAsyncComponent(() =>
@@ -68,8 +78,13 @@ export default {
   mounted() {},
   methods: {
     changeRep() {
-      console.log(this.$options);
       this.reposituries = "新ref函数创建响应式变量，可以在任何地方使用";
+      //迫使组件实例重新渲染，仅仅组件本身和有插入插槽内容的子组件，不是所有子组件
+      this.$forceUpdate();
+      //和全局nextTick一样，只是this挂载地方不同
+      this.$nextTick(() => {
+        console.log("下次DOM渲染前执行");
+      });
     },
     changeAsync() {
       this.showAsync = !this.showAsync;

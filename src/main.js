@@ -49,6 +49,6 @@ app.directive('my-directive', (el, bind) => {
     console.log(el)
     console.log(bind)
 })
-
+app.provide('user', 'provide和inject传递数据')
 app.use(router)
 app.mount('#app')
