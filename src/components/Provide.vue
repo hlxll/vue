@@ -58,10 +58,21 @@ export default {
   },
   methods: {
     changeShow() {
-      console.log(this.$parent.showAsync);
+      const updateLocation = inject("updateLocation");
+      console.log(updateLocation);
       this.show = !this.show;
     },
   },
 };
 </script>
-
+<script setup>
+import { defineProps, defineEmits } from "vue";
+//defineProps和defineEmits只能在setup使用,定义的变量可以直接使用，但是用ref或parent获取该组件，需要使用
+//defineExpose导出
+const props = defineProps({
+  msg: String,
+});
+console.log(props);
+const emit = defineEmits(["change", "delete"]);
+console.log(emit);
+</script>

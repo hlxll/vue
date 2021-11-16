@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <button @click="setHttp()">请求</button>
     <Provide />
     <div id="modals" v-my-directive>{{ reposituries }}</div>
     <button @click="changeRep()">改变</button>
@@ -21,6 +22,7 @@ import {
   ref,
   watch,
 } from "vue";
+import axios from "axios";
 import Provide from "./components/Provide.vue";
 export default {
   name: "App",
@@ -40,19 +42,23 @@ export default {
       import("./components/AsyncComponent.vue")
     ),
   },
-  setup() {
+  setup(props, context) {
+    console.log(context);
     //provider为了响应式，可以将数据使用ref或者reactive定义
     const location = ref("north");
+    //reactive返回对象的响应式副本,如果将ref对象放进去，reactive会解包所有深层的refs
     const getLocation = reactive({
       longitude: 90,
       latitude: 135,
     });
+    // console.log("确定是否是reactive===" + isReactive(getLocation));
     const updateLocation = (data) => {
       console.log(data);
       location.value = "改变provide数据";
     };
     provide("location", location);
     //如果provide传递的数据不想被inject改动，可以加readonly
+    //readonly接受一个对象或ref并返回原始对象的只读代理，深层嵌套的都是只读
     provide("getLocation", readonly(getLocation));
     provide("updateLocation", updateLocation);
     //组件创建之前执行
@@ -77,6 +83,13 @@ export default {
   },
   mounted() {},
   methods: {
+    setHttp() {
+      axios
+        .get("http://localhost:4000/app/all?username=huanglin")
+        .then((res) => {
+          console.log(res);
+        });
+    },
     changeRep() {
       this.reposituries = "新ref函数创建响应式变量，可以在任何地方使用";
       //迫使组件实例重新渲染，仅仅组件本身和有插入插槽内容的子组件，不是所有子组件
@@ -92,6 +105,8 @@ export default {
   },
 };
 </script>
-
+<script setup>
+//这个script响应式状态需要明确使用响应式API，例如ref，reactive创建,不用导出，变量和方法可以直接使用
+</script>
 <style>
 </style>
