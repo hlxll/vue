@@ -14,8 +14,8 @@ export default defineComponent({
   data() {
     return {
       name: "nameprops",
-      value: "valueProp",
+      value: "valueProp"
     };
-  },
+  }
 });
 </script>
