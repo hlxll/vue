@@ -1,4 +1,4 @@
-import Home from "./components/TrabsitionCom";
+import Home from "./components/TrabsitionCom.vue";
 import Login from "./components/Login/loginIndex.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 //hash模式只改变#后面的，不会传入服务器，但是对SEO不友好，history不会

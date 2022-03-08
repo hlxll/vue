@@ -5,9 +5,9 @@ import router from "./router";
 const app = createApp(App);
 //全局API
 app.config = {
-  errorHander: (err, vm, info) => {
-    console.log(info);
-  },
+  // errorHander: (err: any, vm, info) => {
+  //   console.log(info);
+  // },
   warnHandler: (msg, vm, trace) => {
     console.log(trace);
   },

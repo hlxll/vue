@@ -20,6 +20,7 @@ export default {
   props: {
     msg: String,
   },
+  //  !!!setup如果返回渲染函数，就不能再将属性暴露给外部访问，可以使用expose
   setup(props, context) {
     const userLocation = inject("location", "ownValue");
     const updateLocation = inject("updateLocation");
@@ -34,14 +35,15 @@ export default {
       reposituries.value = "黄林";
     };
     onMounted(fn_getUser);
-    //该watch和选项是API一样的效果
+    //该watch和选项式API一样的效果
     watch(reposituries, () => {
       console.log(reposituries.value);
     });
 
+    expose({
+      fn_getUser,
+    });
     //setup第二个参数暴露组件得三个property,Attribute，插槽，出发方法emit，他不是响应式得，可以es6解构
-
-    console.log(context);
 
     return {
       reposituries,
