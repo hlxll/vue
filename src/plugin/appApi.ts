@@ -48,4 +48,5 @@ export default (app: any, param: any) => {
             }
         }
     })
+    app.provide('appName', '全局provide传递数据')
 }
