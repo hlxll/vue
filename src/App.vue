@@ -20,12 +20,15 @@ import {
   reactive,
   readonly,
   ref,
-  watch,
+  watch
 } from "vue";
 import axios from "axios";
 import Provide from "./components/Provide.vue";
 export default {
+  //有name，对于出错有更详细的提示，使用devtools的时候，未命名组件是显示其他的，有name就会很有语意，找路径方便
   name: "App",
+  //未被定义的属性，attrs获取到的属性，将会回退到父组件，且作为普通属性应用到子组件的根节点上（该属性取消默认行为，不应用到子组件）
+  inheritAttrs: false,
   inject: ["user"],
   //子组件设置inheritAttrs，子组件没有设置props时候，判断子组件是否继承父组件props传递的属性
   inheritAttrs: true,
@@ -40,7 +43,7 @@ export default {
     Provide,
     AsyncComponent: defineAsyncComponent(() =>
       import("./components/AsyncComponent.vue")
-    ),
+    )
   },
   setup(props, context) {
     console.log(context);
@@ -49,10 +52,10 @@ export default {
     //reactive返回对象的响应式副本,如果将ref对象放进去，reactive会解包所有深层的refs
     const getLocation = reactive({
       longitude: 90,
-      latitude: 135,
+      latitude: 135
     });
     // console.log("确定是否是reactive===" + isReactive(getLocation));
-    const updateLocation = (data) => {
+    const updateLocation = data => {
       console.log(data);
       location.value = "改变provide数据";
     };
@@ -67,42 +70,40 @@ export default {
       reposituries.value = "黄林";
     };
     onMounted(fn_getUser);
-    //该watch和选项是API一样的效果
+    //该watch和选项API一样的效果
     watch(reposituries, () => {
       console.log(reposituries.value);
     });
     return {
       reposituries,
-      fn_getUser,
+      fn_getUser
     };
   },
   data() {
     return {
-      showAsync: true,
+      showAsync: true
     };
   },
   mounted() {},
   methods: {
     setHttp() {
-      axios
-        .get("http://localhost:4000/app/all?username=huanglin")
-        .then((res) => {
-          console.log(res);
-        });
+      axios.get("http://localhost:4000/app/all?username=huanglin").then(res => {
+        console.log(res);
+      });
     },
     changeRep() {
       this.reposituries = "新ref函数创建响应式变量，可以在任何地方使用";
       //迫使组件实例重新渲染，仅仅组件本身和有插入插槽内容的子组件，不是所有子组件
       this.$forceUpdate();
-      //和全局nextTick一样，只是this挂载地方不同
+      //和在seetup中使用的全局nextTick一样，只是this挂载到调用的实例上
       this.$nextTick(() => {
         console.log("下次DOM渲染前执行");
       });
     },
     changeAsync() {
       this.showAsync = !this.showAsync;
-    },
-  },
+    }
+  }
 };
 </script>
 <script setup>
