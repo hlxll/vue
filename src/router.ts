@@ -35,7 +35,7 @@ const router = createRouter({
     });
   },
 });
-router.beforeEach((to) => {
+router.beforeEach((to, from, next) => {
   console.log(to.meta);
   //通过在路由定义中定义meta，然后在路由守卫中获取meta，判断这个路由是否特别定义
   //比如在判断一个路由不同用户权限时候，通过meta知道这个路由需不需要分不同用户权限，
