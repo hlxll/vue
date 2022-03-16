@@ -14,6 +14,7 @@ import {
   h,
   onBeforeMount,
   provide,
+  inject,
   readonly,
   watch,
   watchEffect,
@@ -46,6 +47,9 @@ export default defineComponent({
         flush: "post",
       }
     );
+
+    // const value = inject('key');
+    // const value = inject('key', 'default')//设置inject默认值
     //provide,因为数据单向流动，可以把更新方法也传递下去,如果不想数据被修改，可以使用readonly
     provide("name", "value");
     provide("setName", setName);

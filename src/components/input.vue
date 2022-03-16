@@ -1,8 +1,8 @@
 <template>
   <div>
     <input type="radio" :value="'radio1'" v-model="inputData.radioValue" />
-    <!-- lazy是不在input事件修改model，在change之后修改model。
-        input是输入时触发，change是输入框失去焦点触发
+    <!-- lazy设置不在input事件时修改model，在change之后修改model。
+        input是输入时触发，change是输入完数据，输入框失去焦点触发
      -->
     <input
       v-model.lazy="inputData.lazyValue"
