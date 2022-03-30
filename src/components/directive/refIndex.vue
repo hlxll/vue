@@ -1,6 +1,8 @@
 <template>
   <div>
     <span ownDire:[dynamicParam]="200"></span>
+    <!-- 指令的动态参数，可以在内部使用表达式或者函数，返回必须是字符串 -->
+    <input v-bind:[someAttr]="true" />
   </div>
 </template>
 <script>
@@ -15,6 +17,11 @@ function ownCustomRef(value) {
   });
 }
 export default {
+  data() {
+    return {
+      someAttr: "disabled",
+    };
+  },
   directives: {
     ownDire: {
       mounted(el, bind) {
