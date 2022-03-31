@@ -33,7 +33,7 @@ export default defineComponent({
         return "自定义的get类compouted";
       },
     },
-    computedGet: {
+    computedSet: {
       get() {
         return this.setter;
       },
