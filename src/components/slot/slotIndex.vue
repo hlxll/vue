@@ -14,6 +14,7 @@
         <br />
         <span>{{ slotProps.item }}</span>
       </template>
+      <template v-slot:[dynamicSlotName]> 动态插槽名 </template>
     </slotChild>
 
     <!--对slot的props可以进行解构使用，也可以定义默认值,只能使用默认插槽内容-->
@@ -31,6 +32,11 @@
 import slotChild from "./slotChild.vue";
 import { defineComponent } from "vue";
 export default defineComponent({
+  data() {
+    return {
+      dynamicSlotName: "dynamicName",
+    };
+  },
   components: {
     slotChild,
   },

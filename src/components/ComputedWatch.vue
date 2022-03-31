@@ -84,13 +84,13 @@ export default defineComponent({
       },
       set(val) {
         this.setter = val;
-      }
-    }
+      },
+    },
   },
   watch: {
-    setter: function(oldVal, newVal) {
+    setter: function (oldVal, newVal) {
       this.watchData = newVal;
-    }
-  }
+    },
+  },
 });
 </script>
