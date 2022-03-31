@@ -1,19 +1,34 @@
 <template>
-  <button @click="close">关闭</button>
-  <span>{{ name }}</span>
+
   <div>
-    <div style="height: 1000px" @click="updateLocation()">动态加载</div>
-    <div id="scrollTopMove">滚动</div>
-    <div v-for="item in deepList" :key="item.index">{{ item.name }}</div>
-    <button @click="addPush()">添加</button>
+
+    <button @click="close">关闭</button>
+
+    <span>{{ name }}</span>
+
+    <div>
+
+      <div style="height: 1000px" @click="updateLocation()">动态加载</div>
+
+      <div id="scrollTopMove">滚动</div>
+
+      <div v-for="item in deepList" :key="item.index">{{ item.name }}</div>
+
+      <button @click="addPush()">添加</button>
+
+    </div>
+
   </div>
+
 </template>
+
 <script>
 export default {
-  setup() {},
   // emits: ["close"],
   methods: {
-    updateLocation() {},
+    updateLocation() {
+      console.log("加载");
+    },
     close() {
       this.$emit("close", false);
     },

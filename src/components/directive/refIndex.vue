@@ -14,7 +14,6 @@ function ownCustomRef(value) {
 }
 export default {
   setup() {
-      let 
     return {
       text: ownCustomRef("name")
     };

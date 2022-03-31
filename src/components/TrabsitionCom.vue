@@ -1,16 +1,21 @@
 <template>
+
   <transition name="fade">
+
     <div v-show="show">transition效果</div>
+
   </transition>
+
 </template>
+
 <script>
 export default {
   props: {
     show: Boolean,
   },
-  setup() {},
 };
 </script>
+
 <style>
 .fade-enter-active,
 .fade-leave-active {

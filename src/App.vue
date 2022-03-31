@@ -1,15 +1,27 @@
 <template>
+
   <div id="app">
+
     <button @click="setHttp()">请求</button>
+
     <Provide />
+
     <div id="modals" v-my-directive>{{ reposituries }}</div>
+
     <button @click="changeRep()">改变</button>
+
     <AsyncComponent v-on:close="changeAsync" v-if="showAsync" />
+
     <!-- 混入其他组件数据 -->
+
     <span v-myDirective="'huanglin'">混入：{{ mergeChild }}</span>
+
     <p>provide和inject{{ user }}</p>
+
     <router-view></router-view>
+
   </div>
+
 </template>
 
 <script>
@@ -20,9 +32,9 @@ import {
   reactive,
   readonly,
   ref,
-  watch
+  watch,
 } from "vue";
-import axios from "axios";
+// import axios from "axios";
 import Provide from "./components/Provide.vue";
 export default {
   //有name，对于出错有更详细的提示，使用devtools的时候，未命名组件是显示其他的，有name就会很有语意，找路径方便
@@ -30,8 +42,6 @@ export default {
   //未被定义的属性，attrs获取到的属性，将会回退到父组件，且作为普通属性应用到子组件的根节点上（该属性取消默认行为，不应用到子组件）
   inheritAttrs: false,
   inject: ["user"],
-  //子组件设置inheritAttrs，子组件没有设置props时候，判断子组件是否继承父组件props传递的属性
-  inheritAttrs: true,
   mixins: [Provide],
   //组件通过ref或者parent或者$root可以访问该组件的数据和方法，但是添加expose限制，定义的才可以被
   //其他组件访问
@@ -39,11 +49,16 @@ export default {
   renderTracked({ key, target, type }) {
     console.log({ key, target, type });
   },
+  data() {
+    return {
+      showAsync: true,
+    };
+  },
   components: {
     Provide,
     AsyncComponent: defineAsyncComponent(() =>
       import("./components/AsyncComponent.vue")
-    )
+    ),
   },
   setup(props, context) {
     console.log(context);
@@ -52,10 +67,10 @@ export default {
     //reactive返回对象的响应式副本,如果将ref对象放进去，reactive会解包所有深层的refs
     const getLocation = reactive({
       longitude: 90,
-      latitude: 135
+      latitude: 135,
     });
     // console.log("确定是否是reactive===" + isReactive(getLocation));
-    const updateLocation = data => {
+    const updateLocation = (data) => {
       console.log(data);
       location.value = "改变provide数据";
     };
@@ -76,20 +91,16 @@ export default {
     });
     return {
       reposituries,
-      fn_getUser
+      fn_getUser,
     };
   },
-  data() {
-    return {
-      showAsync: true
-    };
-  },
-  mounted() {},
   methods: {
     setHttp() {
-      axios.get("http://localhost:4000/app/all?username=huanglin").then(res => {
-        console.log(res);
-      });
+      console.log("请求");
+
+      // axios.get("http://localhost:4000/app/all?username=huanglin").then(res => {
+      //   console.log(res);
+      // });
     },
     changeRep() {
       this.reposituries = "新ref函数创建响应式变量，可以在任何地方使用";
@@ -102,12 +113,16 @@ export default {
     },
     changeAsync() {
       this.showAsync = !this.showAsync;
-    }
-  }
+    },
+  },
 };
 </script>
+
 <script setup>
 //这个script响应式状态需要明确使用响应式API，例如ref，reactive创建,不用导出，变量和方法可以直接使用
 </script>
+
 <style>
+
 </style>
+

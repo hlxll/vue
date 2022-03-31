@@ -1,16 +1,27 @@
 <template>
-  <div>{{ msg }}</div>
-  <div>provider和inject使用{{ userLocation }}</div>
-  <button @click="updateLocation('inject参数')">改变provide</button>
-  <button @click="changeShow()">触发transition</button>
-  <TrabsitionCpm :show="show" />
-  <!-- <teleport to="#modals">
+
+  <div>
+
+    <div>{{ msg }}</div>
+
+    <div>provider和inject使用{{ userLocation }}</div>
+
+    <button @click="updateLocation('inject参数')">改变provide</button>
+
+    <button @click="changeShow()">触发transition</button>
+
+    <TrabsitionCpm :show="show" />
+
+    <!-- <teleport to="#modals">
     <div>模态框 ? ? ?</div>
   </teleport> -->
+
+  </div>
+
 </template>
 
 <script>
-import { inject, onMounted, ref, toRefs, watch } from "vue";
+import { inject, onMounted, ref, toRefs, watch, expose } from "vue";
 import TrabsitionCpm from "./TrabsitionCom.vue";
 export default {
   name: "HelloWorld",
@@ -67,14 +78,17 @@ export default {
   },
 };
 </script>
+ //
 <script setup>
-import { defineProps, defineEmits } from "vue";
-//defineProps和defineEmits只能在setup使用,定义的变量可以直接使用，但是用ref或parent获取该组件，需要使用
-//defineExpose导出
-const props = defineProps({
-  msg: String,
-});
-console.log(props);
-const emit = defineEmits(["change", "delete"]);
-console.log(emit);
+// import { defineProps, defineEmits } from "vue";
+// //defineProps和defineEmits只能在setup使用,定义的变量可以直接使用，但是用ref或parent获取该组件，需要使用
+// //defineExpose导出
+// const props = defineProps({
+//   msg: String,
+// });
+// console.log(props);
+// const emit = defineEmits(["change", "delete"]);
+// console.log(emit);
+//
 </script>
+
