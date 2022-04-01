@@ -2,7 +2,7 @@ import Home from "./components/TrabsitionCom.vue";
 import Login from "./components/Login/loginIndex.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 //hash模式只改变#后面的，不会传入服务器，但是对SEO不友好，history不会
-const routes = [
+const routeList = [
   { path: "/", redirect: "/home" },
   {
     path: "/home",
@@ -23,7 +23,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: routes,
+  routes: routeList,
   scrollBehavior() {
     // 始终滚动到100位置
     // return { top: 100 }

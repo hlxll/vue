@@ -2,6 +2,18 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 
+//ts项目对于文件会判断数据类型，引入的是js文件，所以会告警，类型是any，tsconfig配置"allowJs": true,//允许js
+// "noImplicitAny": false,
+import axios from './axios.js'
+
+axios.interceptors.request.use(() => {
+  console.log('req');
+})
+axios.request({
+  url: '127.0.0.1'
+}).catch((err: any) => {
+  console.log(err);
+})
 const app = createApp(App);
 //全局API
 app.config = {

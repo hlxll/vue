@@ -7,6 +7,7 @@ module.exports = {
     //指定生成的 index.html 的输出路径 相对于outputDir
     indexPath: "index",
 
+
     //当使用非原生HTML标签的时候，vue会将他解析为一个注册的vue组件，如果失败，会将他渲染为自定义
     // 元素，但是也会告警：配置解决
     chainWebpack: config => {

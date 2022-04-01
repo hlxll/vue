@@ -1,12 +1,19 @@
 <template>
-  <div>{{ msg }}</div>
-  <div>provider和inject使用{{ userLocation }}</div>
-  <button @click="updateLocation('inject参数')">改变provide</button>
-  <button @click="changeShow()">触发transition</button>
-  <TrabsitionCpm :show="show" />
-  <!-- <teleport to="#modals">
+  <div>
+    <div>{{ msg }}</div>
+
+    <div>provider和inject使用{{ userLocation }}</div>
+
+    <button @click="updateLocation('inject参数')">改变provide</button>
+
+    <button @click="changeShow()">触发transition</button>
+
+    <TrabsitionCpm :show="show" />
+
+    <!-- <teleport to="#modals">
     <div>模态框 ? ? ?</div>
   </teleport> -->
+  </div>
 </template>
 
 <script>
@@ -20,8 +27,10 @@ export default {
   props: {
     msg: String,
   },
+  expose: ["increment"],
   //  !!!setup如果返回渲染函数，就不能再将属性暴露给外部访问，可以使用expose
   setup(props, context) {
+    console.log(context);
     const userLocation = inject("location", "ownValue");
     const updateLocation = inject("updateLocation");
     //props是响应式的，不能使用ES6解构，会消除prop响应，得使用toRefs解构
@@ -40,7 +49,7 @@ export default {
       console.log(reposituries.value);
     });
 
-    expose({
+    context.expose({
       fn_getUser,
     });
     //setup第二个参数暴露组件得三个property,Attribute，插槽，出发方法emit，他不是响应式得，可以es6解构
@@ -66,15 +75,4 @@ export default {
     },
   },
 };
-</script>
-<script setup>
-import { defineProps, defineEmits } from "vue";
-//defineProps和defineEmits只能在setup使用,定义的变量可以直接使用，但是用ref或parent获取该组件，需要使用
-//defineExpose导出
-const props = defineProps({
-  msg: String,
-});
-console.log(props);
-const emit = defineEmits(["change", "delete"]);
-console.log(emit);
 </script>
