@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-// import router from "./router";
+import router from "./router";
 
 const app = createApp(App);
 //全局API
@@ -41,9 +41,9 @@ app.directive("myDirective", {
   },
 });
 //全局注册组件
-app.component('all-component', {
-  template: `<div></div>`
-})
+app.component("all-component", {
+  template: `<div></div>`,
+});
 // 注册 (功能指令)
 app.directive("my-directive", (el, bind) => {
   // 这将被作为 `mounted` 和 `updated` 调用
@@ -51,5 +51,5 @@ app.directive("my-directive", (el, bind) => {
   console.log(bind);
 });
 app.provide("user", "provide和inject传递数据");
-// app.use(router);
+app.use(router);
 app.mount("#app");

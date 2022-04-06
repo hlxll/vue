@@ -1,10 +1,12 @@
 <template>
-  <div>setup</div>
   <div>
-    <p>名称是:{{ name }}</p>
+    <div>setup</div>
+    <div>
+      <p>名称是:{{ name }}</p>
+    </div>
+    <p>自定义指令input</p>
+    <input v-focus:[direction]="200" />
   </div>
-  <p>自定义指令input</p>
-  <input v-focus:[direction]="200" />
 </template>
 <script lang="ts">
 import {
@@ -17,12 +19,12 @@ import {
   inject,
   readonly,
   watch,
-  watchEffect,
+  watchEffect
 } from "vue";
 export default defineComponent({
   data() {
     return {
-      direction: "right",
+      direction: "right"
     };
   },
   setup(props, context) {
@@ -31,7 +33,7 @@ export default defineComponent({
 
     let name = ref("huanglin");
 
-    var setName = function (value: any) {
+    var setName = function(value: any) {
       name = value;
     };
     //模板引用
@@ -44,7 +46,7 @@ export default defineComponent({
       },
       {
         //监听器默认在DOM更新前调用，配置flush就在dom更新后执行
-        flush: "post",
+        flush: "post"
       }
     );
 
@@ -61,7 +63,7 @@ export default defineComponent({
 
     //expose是想 将数据返回给父组件使用ref获取的时候使用，如果setup使用渲染函数，无法返回数据了，就可以使用expose
     expose({
-      name,
+      name
     });
     return { name };
     // return () => h("div", {}, ["setup渲染函数", h("p", {}, ["setup子元素"])]);
@@ -96,8 +98,8 @@ export default defineComponent({
       },
       unmounted() {
         //   当指令与元素解除绑定且父组件已卸载时，只调用一次。
-      },
-    },
-  },
+      }
+    }
+  }
 });
 </script>

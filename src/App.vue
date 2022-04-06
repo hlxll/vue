@@ -1,7 +1,5 @@
 <template>
-
   <div id="app">
-
     <button @click="setHttp()">请求</button>
 
     <Provide />
@@ -10,7 +8,7 @@
 
     <button @click="changeRep()">改变</button>
 
-    <AsyncComponent v-on:close="changeAsync" v-if="showAsync" />
+    <!-- <AsyncComponent v-on:close="changeAsync" v-if="showAsync" /> -->
 
     <!-- 混入其他组件数据 -->
 
@@ -18,10 +16,10 @@
 
     <p>provide和inject{{ user }}</p>
 
+    <!-- 路由 -->
+    <div>路由界面部分</div>
     <router-view></router-view>
-
   </div>
-
 </template>
 
 <script>
@@ -32,7 +30,7 @@ import {
   reactive,
   readonly,
   ref,
-  watch,
+  watch
 } from "vue";
 // import axios from "axios";
 import Provide from "./components/Provide.vue";
@@ -51,14 +49,14 @@ export default {
   },
   data() {
     return {
-      showAsync: true,
+      showAsync: true
     };
   },
   components: {
-    Provide,
-    AsyncComponent: defineAsyncComponent(() =>
-      import("./components/AsyncComponent.vue")
-    ),
+    Provide
+    // AsyncComponent: defineAsyncComponent(() =>
+    //   import("./components/AsyncComponent.vue")
+    // )
   },
   setup(props, context) {
     console.log(context);
@@ -67,10 +65,10 @@ export default {
     //reactive返回对象的响应式副本,如果将ref对象放进去，reactive会解包所有深层的refs
     const getLocation = reactive({
       longitude: 90,
-      latitude: 135,
+      latitude: 135
     });
     // console.log("确定是否是reactive===" + isReactive(getLocation));
-    const updateLocation = (data) => {
+    const updateLocation = data => {
       console.log(data);
       location.value = "改变provide数据";
     };
@@ -91,7 +89,7 @@ export default {
     });
     return {
       reposituries,
-      fn_getUser,
+      fn_getUser
     };
   },
   methods: {
@@ -113,8 +111,8 @@ export default {
     },
     changeAsync() {
       this.showAsync = !this.showAsync;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -123,6 +121,5 @@ export default {
 </script>
 
 <style>
-
 </style>
 
