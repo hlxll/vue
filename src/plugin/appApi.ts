@@ -11,10 +11,35 @@ export default (app: any, param: any) => {
             </button>`,
   });
   //无效？？
-  app.config.optionMergeStrategies.custom = (parent: any, child: any) => {
-    return child;
-  };
+  // app.config.optionMergeStrategies.custom = (parent: any, child: any) => {
+  //   return child;
+  // };
 
+  // app.comfig.errorHandler = (err, vm) => {
+  //   console.log('在渲染函数和侦听器执行期间出现的错误处理')
+  // }
+  app.config.warnHandler = (msg, vm, trace) => {
+    console.log('vue运行时的警告，只在开发环境有效');
+  }
+  app.config.globalProperties.foo = '全局属性'
+
+  //为使用mixin时候，组件数据合并的策略
+  app.config.optionMergeStrategies.foo = (parent, child) => {
+    return '子child的value'
+  }
+  //只适用于开发环境，在浏览器的timeline面板启用对性能追踪
+  app.config.performance = true
+  //传入浏览器内的模板编译器，影响每一个组件，
+  app.config.compilerOptions = {
+    //识别vue以外的自定义元素，
+    isCustomElement: (tag) => tag.startsWith("ion-"),
+    //压缩空格
+    whitespace: "preserve",
+    //文本插值的边界符
+    delimiters: ["${", "}"],
+    //移除注释
+    comments: true,
+  }
   //directive两个参数，第二个参数是指令实例
   app.directive("my-directive", {
     // 指令具有一组生命周期钩子：

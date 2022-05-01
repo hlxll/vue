@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <button @click="setHttp()">请求</button>
+    <p>路由</p>
+    <router-view></router-view>
+    <p>路由</p>
 
     <Provide />
 
@@ -15,8 +18,6 @@
     <span v-myDirective="'huanglin'">混入：{{ mergeChild }}</span>
 
     <p>provide和inject{{ user }}</p>
-
-    <router-view></router-view>
   </div>
 </template>
 
@@ -31,7 +32,7 @@ import {
   watch,
 } from "vue";
 // import axios from "axios";
-import Provide from "./components/Provide.vue";
+import Provide from "../components/Provide.vue";
 export default {
   //有name，对于出错有更详细的提示，使用devtools的时候，未命名组件是显示其他的，有name就会很有语意，找路径方便
   name: "App",
@@ -65,7 +66,7 @@ export default {
   components: {
     Provide,
     AsyncComponent: defineAsyncComponent(() =>
-      import("./components/AsyncComponent.vue")
+      import("../components/AsyncComponent.vue")
     ),
   },
   setup() {
@@ -103,11 +104,14 @@ export default {
   },
   methods: {
     setHttp() {
-      console.log("请求");
-
-      // axios.get("http://localhost:4000/app/all?username=huanglin").then(res => {
-      //   console.log(res);
-      // });
+      var encodeStr = encodeURI("www.baidu.com");
+      var base = btoa("www.baidu.com");
+      console.log(base);
+      // 对base64转编码
+      var decode = atob(base);
+      // 编码转字符串
+      var str = decodeURI(decode);
+      console.log(str);
     },
     changeRep() {
       this.reposituries = "新ref函数创建响应式变量，可以在任何地方使用";

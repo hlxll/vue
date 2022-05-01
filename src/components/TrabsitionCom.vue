@@ -1,11 +1,10 @@
 <template>
-
-  <transition name="fade">
-
-    <div v-show="show">transition效果</div>
-
-  </transition>
-
+  <div>
+    <router-view></router-view>
+    <transition name="fade">
+      <div v-show="show">transition效果</div>
+    </transition>
+  </div>
 </template>
 
 <script>
