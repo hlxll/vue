@@ -2,6 +2,8 @@ import HomeChild from "./views/HomeChild.vue";
 import Login from "./components/Login/loginIndex.vue";
 import Main from "./views/MainHome.vue";
 import NotFoundComponent from "./views/NotFoundComponent.vue";
+import WbComponent from "./views/WB/wbMain.vue";
+
 import { createRouter, createWebHashHistory } from "vue-router";
 //hash模式只改变#后面的，不会传入服务器，但是对SEO不友好，history不会
 const routes = [
@@ -22,6 +24,11 @@ const routes = [
     path: "/:patch(.*)*",
     name: "notFound",
     component: NotFoundComponent,
+  },
+  {
+    path: "/wb",
+    name: "wb",
+    component: WbComponent,
   },
 ];
 
