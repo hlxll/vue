@@ -13,6 +13,7 @@
     <!-- 混入其他组件数据 -->
 
     <span v-myDirective="'huanglin'">混入：{{ mergeChild }}</span>
+    <ico-name>{{ mergeChild }}</ico-name>
 
     <p>provide和inject{{ user }}</p>
 

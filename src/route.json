@@ -1,0 +1,19 @@
+[
+  {
+    "path": "/main",
+    "name": "main",
+    "component": "Main",
+    "children": [
+      {
+        "path": "/main/:id",
+        "name": "homeChild",
+        "component": "HomeChild"
+      }
+    ]
+  },
+  {
+    "path": "/:patch(.*)*",
+    "name": "notFound",
+    "component": "NotFoundComponent"
+  }
+]
