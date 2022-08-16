@@ -2,6 +2,7 @@
   <div>
     <div id="login">login</div>
     <div>{{ foo }}</div>
+    <div>{{ name }}</div>
     <button @click="setHttp()">请求</button>
 
     <!-- 多视图设置,多个 router-view， 定义name，没有name就是 -->
