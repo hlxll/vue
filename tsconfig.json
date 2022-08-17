@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "allowJs": true,//允许js
+    "noImplicitAny": false,
     "target": "esnext",
     "module": "esnext",
-    "strict": true,
+    "strict": true,//禁用严格模式
     "jsx": "preserve",
     "moduleResolution": "node",
     "skipLibCheck": true,
@@ -32,9 +34,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }

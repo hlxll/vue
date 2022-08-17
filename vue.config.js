@@ -20,14 +20,16 @@ module.exports = {
         },
       }));
   },
-  //   devServer: {
-  //     proxy: {
-  //       "/api": {
-  //         target: "localhost:4000",
-  //         pathRewrite: { "^/api": "" },
-  //         ws: true,
-  //         changeOrigin: true,
-  //       },
-  //     },
-  //   },
+  devServer: {
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:4000",
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: {
+          "^/api": "",
+        },
+      },
+    },
+  },
 };

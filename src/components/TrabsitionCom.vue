@@ -1,9 +1,9 @@
 <template>
   <div>
+    <router-view></router-view>
     <transition name="fade">
       <div v-show="show">transition效果</div>
     </transition>
-    <p>子组件路由{{$route.params.id}}</p>
   </div>
 </template>
 

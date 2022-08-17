@@ -13,7 +13,7 @@ export default defineComponent({
   data() {
     return {
       setter: "计算属性",
-      watchData: "监视器数据"
+      watchData: "监视器数据",
     };
   },
   setup() {
@@ -25,7 +25,7 @@ export default defineComponent({
     });
 
     //watchEffect是在update更新前执行的
-    const stopRef = watchEffect(onInvalidate => {
+    const stopRef = watchEffect((onInvalidate) => {
       //对于ref创建数据，使用.value才能监视
       console.log(refObj.value);
 
@@ -58,27 +58,31 @@ export default defineComponent({
         console.log(preVal);
       },
       {
-        deep: true
+        deep: true,
       }
     );
     //如果想监视对象，需要使用deep配置,不然只能监视基本数据
     return {
-      name: name,
+      name: obj.name,
       change: change,
-      changeRef: changeRef
+      changeRef: changeRef,
     };
   },
   methods: {
     changeWatch() {
       this.watchData = "改变后的监视器数据";
-    }
+    },
   },
   computed: {
     computedData() {
       return "计算属性返回值";
     },
-
     computedGet: {
+      getters() {
+        return "自定义的get类compouted";
+      },
+    },
+    computedSet: {
       get() {
         return this.setter;
       },

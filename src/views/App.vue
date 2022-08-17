@@ -1,12 +1,31 @@
 <template>
   <div id="app">
+    <button @click="setHttp()">请求</button>
+    <p>路由</p>
     <router-view></router-view>
+    <p>路由</p>
+
+    <Provide />
+
+    <div id="modals" v-my-directive>{{ reposituries }}</div>
+
+    <button @click="changeRep()">改变</button>
+
+    <AsyncComponent v-on:close="changeAsync" v-if="showAsync" />
+
+    <!-- 混入其他组件数据 -->
+
+    <span v-myDirective="'huanglin'">混入：{{ mergeChild }}</span>
+
+    <p>provide和inject{{ user }}</p>
+    <p>{{value}}</p>
   </div>
 </template>
 
 <script>
 import { onMounted, provide, reactive, readonly, ref, watch } from "vue";
 // import axios from "axios";
+import Provide from "../components/Provide.vue";
 export default {
   //有name，对于出错有更详细的提示，使用devtools的时候，未命名组件是显示其他的，有name就会很有语意，找路径方便
   name: "App",
@@ -18,6 +37,18 @@ export default {
   renderTracked({ key, target, type }) {
     console.log({ key, target, type });
   },
+  beforeCreate() {
+    this.axios
+      .request({
+        url: "www.baidu.com"
+      })
+      .then(res => {
+        console.log("res");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
   data() {
     return {
       showAsync: true
@@ -28,8 +59,7 @@ export default {
     //   import("./components/AsyncComponent.vue")
     // )
   },
-  setup(props, context) {
-    console.log(context);
+  setup() {
     //provider为了响应式，可以将数据使用ref或者reactive定义
     const location = ref("north");
     //reactive返回对象的响应式副本,如果将ref对象放进去，reactive会解包所有深层的refs
@@ -64,11 +94,14 @@ export default {
   },
   methods: {
     setHttp() {
-      console.log("请求");
-
-      // axios.get("http://localhost:4000/app/all?username=huanglin").then(res => {
-      //   console.log(res);
-      // });
+      var encodeStr = encodeURI("www.baidu.com");
+      var base = btoa("www.baidu.com");
+      console.log(base);
+      // 对base64转编码
+      var decode = atob(base);
+      // 编码转字符串
+      var str = decodeURI(decode);
+      console.log(str);
     },
     changeRep() {
       this.reposituries = "新ref函数创建响应式变量，可以在任何地方使用";

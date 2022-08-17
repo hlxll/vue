@@ -1,5 +1,7 @@
 <template>
   <div>
+  <div>setup</div>
+  <div>
     <div>setup</div>
     <div>
       <p>名称是:{{ name }}</p>
@@ -7,6 +9,9 @@
     <p>自定义指令input</p>
     <input v-focus:[direction]="200" />
   </div>
+  <p>自定义指令input</p>
+  <input v-focus:[direction]="200" />
+  <div/>
 </template>
 <script lang="ts">
 import {
@@ -28,6 +33,8 @@ export default defineComponent({
     };
   },
   setup(props, context) {
+    //setup实在组件实例之前调用的，所以内部this和其他选项API的this不同
+
     const propData = toRefs(props);
     let { attrs, slots, emit, expose } = context;
 
