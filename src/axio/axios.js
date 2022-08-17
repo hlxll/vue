@@ -35,7 +35,7 @@ Axios.prototype.request = function (config) {
                     // 判断状态码是否正确
                     if (xhr.status >= 200 && xhr.status < 300) {
                         // 得到响应体的内容
-                        const data = JSON.parse(xhr.responseText);
+                        const data = xhr.responseText
                         // 得到响应头
                         const headers = xhr.getAllResponseHeaders();
                         // request 即是 xhr
@@ -70,7 +70,7 @@ Axios.prototype.request = function (config) {
                 // config.url = config.url + "?" + url;
                 config.url += "?" + url;
             }
-            xhr.open(method, config.url);
+            xhr.open(method, '/api' + config.url);
             // post put patch
             if (method === "POST" || method === "PUT" || method === "PATCH") {
                 if (typeof config.data === "object")

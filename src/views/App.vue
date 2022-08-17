@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    
     <button @click="setHttp()">请求</button>
     <p>路由</p>
     <router-view></router-view>
@@ -18,6 +19,8 @@
     <span v-myDirective="'huanglin'">混入：{{ mergeChild }}</span>
 
     <p>provide和inject{{ user }}</p>
+    <p>{{value}}</p>
+
   </div>
 </template>
 
@@ -61,6 +64,7 @@ export default {
   data() {
     return {
       showAsync: true,
+      value: '父组件mixin数据'
     };
   },
   components: {

@@ -65,6 +65,7 @@ export default {
     return {
       show: true,
       mergeChild: "mergeChild",
+      value: '子组件mixin数据'
     };
   },
   methods: {

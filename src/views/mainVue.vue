@@ -1,8 +1,6 @@
 <template>
   <div>
-    <render-component></render-component>
     <router-view></router-view>
-    <el-date-picker></el-date-picker>
   </div>
 </template>
 

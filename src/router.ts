@@ -4,7 +4,7 @@ import AppChild from "./views/AppChild.vue"
 import Login from "./components/Login/loginIndex.vue";
 import LoginA from "./components/Login/child/loginA.vue"
 import LoginB from "./components/Login/child/loginB.vue"
-
+import wbComponent from './views/wbComponent.vue'
 
 import SlotVue from './components/slot/slotIndex.vue'
 import { createRouter, createWebHashHistory } from "vue-router";
@@ -19,6 +19,10 @@ const routeList = [
       // return 重定向的字符串路径/路径对象
       return { path: '/login', query: { q: to.params.searchText } }
     },
+  },
+  {
+    path: '/wb',
+    component: wbComponent
   },
   {
     path: '/app', component: App,

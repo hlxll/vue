@@ -7,7 +7,7 @@ export default (app: any, param: any) => {
   //  字符串形式，app.version获取vue版本，对于不同版本写不同插件很有用
 
   //============================应用配置
-  // app.comfig.errorHandler = (err, vm) => {
+  // app.comfig.errorHandler = (err, instance, info) => {
   //   console.log('在渲染函数和侦听器执行期间出现的错误处理')
   // }
   app.config.warnHandler = (msg, vm, trace) => {
@@ -15,9 +15,12 @@ export default (app: any, param: any) => {
   }
   app.config.globalProperties.foo = '全局属性'
 
-  //为使用mixin时候，组件数据合并的策略
-  app.config.optionMergeStrategies.foo = (parent, child) => {
-    return '子child的value'
+  //为使用mixin时候，组件数据合并的策略,默认合并策略是看child存在否，存在就使用child的，不存在就使用parent的
+  // 如果有多个生命周期钩子，则直接合并成数组并返回。
+  // 如果父组件和子组件都设置了钩子函数选项，那么 它们会合并到一个数组里，而且父组件的钩子函数会先执行，最后返回一个合并后的数组。
+  //合并的原理是通过原型链的原理实现
+  app.config.optionMergeStrategies.value = (parent, child) => {
+    return parent
   }
   //只适用于开发环境，在浏览器的timeline面板启用对性能追踪
   app.config.performance = true

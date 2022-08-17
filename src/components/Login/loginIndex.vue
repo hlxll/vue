@@ -14,17 +14,20 @@
 <script>
 export default {
   mounted() {
-    console.log(this.$axios);
     this.$axios
       .request({
-        url: "127.0.0.1",
+        url: "/admin",
+      }).then(res => {
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
   },
   data() {
-    return {};
+    return {
+      
+    };
   },
   methods: {
     setHttp() {
