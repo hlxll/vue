@@ -50,16 +50,16 @@ export default {
     console.log({ key, target, type });
   },
   beforeCreate() {
-    // this.axios
-    //   .request({
-    //     url: "www.baidu.com",
-    //   })
-    //   .then((res) => {
-    //     console.log("res");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    this.axios
+      .request({
+        url: "www.baidu.com",
+      })
+      .then((res) => {
+        console.log("res");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   data() {
     return {

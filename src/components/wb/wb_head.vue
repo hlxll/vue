@@ -1,6 +1,6 @@
 <template>
     <div class="head">
-        <button class="loginBtn">登录</button>
+        <button class="loginBtn" >登录</button>
         <loginModal>
             <div class="loginModal">
                 <p>请选择如下方式登录微博</p>
@@ -15,6 +15,23 @@ export default {
     name: 'wbHead',
     components: {
         loginModal
+    },
+    created() { 
+        this.f_createQr()
+    },
+    methods: {
+        f_createQr: function () {
+            this.$axios
+            .request({
+                url: "/admin/qrCode",
+            })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        }
     }
 }
 </script>
