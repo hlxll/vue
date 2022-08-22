@@ -35,6 +35,7 @@ export default {
     margin: auto;
     padding: 5px;
     border-radius: 5px;
+    text-align: center;
 }
 .pointer{
     cursor: pointer;
