@@ -1,58 +1,65 @@
 <template>
     <div class="head">
-        <button class="loginBtn" >登录</button>
-        <loginModal>
-            <div class="loginModal">
-                <p>请选择如下方式登录微博</p>
-                <p>打开 微博手机APP - 我的 - 扫一扫</p>
-            </div>
-            <img :src="qrCodeUrl"/>
-            <div v-if="sessionTimeOut" class="nosessionImg">二维码已过期</div>
+        <button class="loginBtn" @click="methods.f_openLogin">登录</button>
+        <loginModal @f-cancel="methods.fCancel" v-show="showLogin">
+            <template v-slot:headTitle>
+                登录
+            </template>
+            <template v-slot:default>
+                <div class="loginModal">
+                    <p>请选择如下方式登录微博</p>
+                    <p>打开 微博手机APP - 我的 - 扫一扫</p>
+                </div>
+                <img :src="qrCodeUrl"/>
+                <div v-if="sessionTimeOut" class="nosessionImg">二维码已过期</div>
+            </template>
         </loginModal>
     </div>
 </template>
-<script>
-import loginModal from './wb_modal.vue'
-export default {
-    name: 'wbHead',
-    components: {
-        loginModal
-    },
-    created() { 
-        this.f_createQr()
-    },
-    data() { 
-        return {
-            qrCodeUrl: '',
-            getSession: '',
-            sessionTimeOut: false
-        }
-    },
-    methods: {
-        f_createQr: function () {
-            this.$axios
-            .request({
-                url: "/admin/qrCode",
-            }).then((res) => {
-                this.sessionTimeOut = false
-                this.qrCodeUrl = res.data
+<script setup>
+import { getCurrentInstance, ref, defineAsyncComponent } from 'vue';
+const loginModal = defineAsyncComponent(() => {
+    return  import('./wb_modal.vue')
+})
+let sessionTimeOut = ref(false)
+let qrCodeUrl = ref('')
+let showLogin = ref(false)
+let getIntervalId = ref()
+let {proxy} = getCurrentInstance()
+const methods = {
+    f_createQr: function () {
+        proxy.$axios
+        .request({
+            url: "/admin/qrCode",
+        }).then((res) => {
+            sessionTimeOut.value = false
+            qrCodeUrl.value = res.data
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+        getIntervalId = setInterval(() => {
+            proxy.$axios.request({
+                url: "/admin/getSession"
+            }).then(res => {
+                if (res.data == 'false') {
+                    sessionTimeOut.value = true
+                    clearInterval(getIntervalId)
+                }
+            }).catch(err => {
+                clearInterval(getIntervalId)
             })
-            .catch((err) => {
-                console.log(err);
-            });
-            this.getSession = setInterval(() => {
-                this.$axios.request({
-                    url: "/admin/getSession"
-                }).then(res => {
-                    if (res.data == 'false') {
-                        this.sessionTimeOut = true
-                        clearInterval(this.getSession)
-                    }
-                })
-            }, 1000)
-        }
+        }, 1000)
+    },
+    fCancel: function (isClose) {
+        showLogin.value = !isClose
+    },
+    f_openLogin: function () {
+        showLogin.value = true
+        methods.f_createQr()
     }
 }
+
 </script>
 <style scoped>
 .loginBtn{

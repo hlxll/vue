@@ -2,6 +2,9 @@
     <div class="modal">
         <div class="main">
             <div style="text-align: right;">
+                <span class="title">
+                    <slot name="headTitle"></slot>
+                </span>
                 <span @click="f_cancel" class="pointer">x</span>
             </div>
             <slot/>
@@ -12,9 +15,10 @@
 export default {
     methods: {
         f_cancel: function () {
-            this.$emit('f_cancel', true)
+            this.$emit('f-cancel', true)
         }
     }
+
 }
 </script>
 <style scoped>
@@ -36,6 +40,9 @@ export default {
     padding: 5px;
     border-radius: 5px;
     text-align: center;
+}
+.title{
+    float: left;
 }
 .pointer{
     cursor: pointer;
