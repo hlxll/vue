@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    
     <button @click="setHttp()">请求</button>
     <p>路由</p>
     <router-view></router-view>
@@ -20,20 +19,11 @@
 
     <p>provide和inject{{ user }}</p>
     <p>{{value}}</p>
-
   </div>
 </template>
 
 <script>
-import {
-  defineAsyncComponent,
-  onMounted,
-  provide,
-  reactive,
-  readonly,
-  ref,
-  watch,
-} from "vue";
+import { onMounted, provide, reactive, readonly, ref, watch } from "vue";
 // import axios from "axios";
 import Provide from "../components/Provide.vue";
 export default {
@@ -41,8 +31,6 @@ export default {
   name: "App",
   //未被定义的属性，attrs获取到的属性，将会回退到父组件，且作为普通属性应用到子组件的根节点上（该属性取消默认行为，不应用到子组件）
   inheritAttrs: false,
-  inject: ["user"],
-  mixins: [Provide],
   //组件通过ref或者parent或者$root可以访问该组件的数据和方法，但是添加expose限制，定义的才可以被
   //其他组件访问
   expose: ["showAsync"],
@@ -52,26 +40,24 @@ export default {
   beforeCreate() {
     this.axios
       .request({
-        url: "www.baidu.com",
+        url: "www.baidu.com"
       })
-      .then((res) => {
+      .then(res => {
         console.log("res");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   data() {
     return {
-      showAsync: true,
-      value: '父组件mixin数据'
+      showAsync: true
     };
   },
   components: {
-    Provide,
-    AsyncComponent: defineAsyncComponent(() =>
-      import("../components/AsyncComponent.vue")
-    ),
+    // AsyncComponent: defineAsyncComponent(() =>
+    //   import("./components/AsyncComponent.vue")
+    // )
   },
   setup() {
     //provider为了响应式，可以将数据使用ref或者reactive定义
@@ -79,10 +65,10 @@ export default {
     //reactive返回对象的响应式副本,如果将ref对象放进去，reactive会解包所有深层的refs
     const getLocation = reactive({
       longitude: 90,
-      latitude: 135,
+      latitude: 135
     });
     // console.log("确定是否是reactive===" + isReactive(getLocation));
-    const updateLocation = (data) => {
+    const updateLocation = data => {
       console.log(data);
       location.value = "改变provide数据";
     };
@@ -103,7 +89,7 @@ export default {
     });
     return {
       reposituries,
-      fn_getUser,
+      fn_getUser
     };
   },
   methods: {
@@ -128,8 +114,8 @@ export default {
     },
     changeAsync() {
       this.showAsync = !this.showAsync;
-    },
-  },
+    }
+  }
 };
 </script>
 

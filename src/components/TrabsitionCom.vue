@@ -10,8 +10,14 @@
 <script>
 export default {
   props: {
-    show: Boolean,
+    show: Boolean
   },
+  data() {
+    return {};
+  },
+  beforeCreate() {
+    console.log(this.$route.params);
+  }
 };
 </script>
 
