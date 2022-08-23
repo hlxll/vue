@@ -1,5 +1,5 @@
 <template>
-  <div class="head">
+  <div class="headComponent">
     <button class="loginBtn" @click="methods.f_openLogin">登录</button>
     <loginModal @f-cancel="methods.fCancel" v-show="showLogin">
       <template v-slot:headTitle> 登录 </template>
@@ -62,7 +62,13 @@ const methods = {
   },
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
+.headComponent {
+  height: 40px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
 .loginBtn {
   width: 50px;
   height: 30px;
@@ -76,9 +82,9 @@ const methods = {
 .loginModal {
   width: 270px;
   height: auto;
-}
-.loginModal > p {
-  text-align: center;
+  p {
+    text-align: center;
+  }
 }
 .nosessionImg {
   width: 116px;
