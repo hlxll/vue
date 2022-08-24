@@ -4,7 +4,7 @@
     <Transition name="head">
       <wbHead v-show="scrollShow" class="wbHead"></wbHead>
     </Transition>
-    <wbTextItem></wbTextItem>
+    <wbTextItem :scrollShow="scrollShow"></wbTextItem>
   </div>
 </template>
 <script>
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     f_scroll: function () {
-      if (window.scrollY >= 10) {
+      if (window.scrollY >= 250) {
         if (!this.scrollShow) {
           this.scrollShow = true;
         }
@@ -38,23 +38,21 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.wbCom {
-  .wbHead {
+<style>
+.wbHead {
     position: fixed;
     left: 0;
-    right: 0%;
+    right: 0;
     top: 0;
   }
-}
 
 .head-enter-active,
 .head-leave-active {
-  transition: opacity 1s;
+  transition: transform 1s ease;
 }
 
 .head-enter-from,
 .head-leave-to {
-  opacity: 0;
+  transform: translateY(0px);
 }
 </style>

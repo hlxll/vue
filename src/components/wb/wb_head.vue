@@ -62,7 +62,7 @@ const methods = {
   },
 };
 </script>
-<style scoped lang="scss">
+<style scoped>
 .headComponent {
   height: 40px;
   background-color: white;
@@ -82,9 +82,10 @@ const methods = {
 .loginModal {
   width: 270px;
   height: auto;
-  p {
+  
+}
+.loginModal >p {
     text-align: center;
-  }
 }
 .nosessionImg {
   width: 116px;
