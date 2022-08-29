@@ -1,37 +1,45 @@
 <template>
-  <div style="position: relative;">
-    <div style="width: 100%;height: 330px;overflow: hidden;">
+  <div style="position: relative">
+    <div style="width: 100%; height: 330px; overflow: hidden">
       <video
-      autoplay="true"
-      src="https://a.sinaimg.cn/mintra/pic/2112130543/weibo_login.mp4"
-      class="video"
-    ></video>
+        autoplay="true"
+        src="https://a.sinaimg.cn/mintra/pic/2112130543/weibo_login.mp4"
+        class="video"
+      ></video>
     </div>
     <div class="videoText">
-      <div style="text-align: center;">
-        <span class="wbIcon logSize"></span>
-        <div class="logJustyi">
-          <span class="bgWeiBo"></span>
-          <span class="bgweibocom"></span>
-        </div>
+      <div style="text-align: center" class="wbLog">
+        <wbLog></wbLog>
       </div>
-      <div class="videoInput" :style="{'border':focus?'1px solid #ff8200':'0'}">
+      <div
+        class="videoInput"
+        :style="{ border: focus ? '1px solid #ff8200' : '0' }"
+      >
         <div class="sousuoIcon">
-          <img src="../../../public/image/sousuo.svg"/>
+          <img src="../../../public/image/sousuo.svg" />
         </div>
-        <input class="sousuoInput" type="default" @focusout="f_inputFocus(false)" @focusin="f_inputFocus(true)"/>
+        <input
+          class="sousuoInput"
+          type="default"
+          @focusout="f_inputFocus(false)"
+          @focusin="f_inputFocus(true)"
+        />
         <button class="sousuoBtn">搜索</button>
       </div>
     </div>
   </div>
 </template>
 <script>
+import wbLog from "./wb_log.vue";
 export default {
-  name: 'wbMain',
+  name: "wbMain",
+  components: {
+    wbLog,
+  },
   data() {
     return {
       ws: "",
-      focus: false
+      focus: false,
     };
   },
   methods: {
@@ -39,8 +47,8 @@ export default {
       this.ws.send("我是" + this.$route.query.user);
     },
     f_inputFocus: function (event) {
-      this.focus = event
-    }
+      this.focus = event;
+    },
   },
   mounted() {
     this.ws = new WebSocket("ws://127.0.0.1:5000");
@@ -58,7 +66,7 @@ export default {
   transform: translateX(-16%);
   height: 330px;
 }
-.videoText{
+.videoText {
   width: 700px;
   height: 140px;
   position: absolute;
@@ -67,32 +75,12 @@ export default {
   margin-top: -70px;
   margin-left: -350px;
 }
-.logSize{
-  width: 50px;
-  height: 50px;
-}
-.logJustyi{
-  display: inline-block;
-}
-.bgWeiBo{
-  background: url('../../../public/image/logo.png');
-  background-size: auto;
-  width: 100px;
-  height: 35px;
-  display: block;
-  background-position: -146px -4px;
-}
-.bgweibocom{
-  background: url('../../../public/image/logo.png');
-  background-size: 190px;
-  background-repeat: no-repeat;
-  width: 70px;
-  height: 20px;
-  display: block;
-  background-position: 0px 0px;
+.wbLog {
+  height: 57px;
+  width: 130px;
   margin: auto;
 }
-.videoInput{
+.videoInput {
   display: flex;
   border-radius: 24px;
   width: 700px;
@@ -100,27 +88,28 @@ export default {
   background-color: #fff;
   margin-top: 35px;
 }
-.sousuoIcon{
+.sousuoIcon {
   width: 56px;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.sousuoIcon > img{
+.sousuoIcon > img {
   width: 22px;
   height: 22px;
 }
-.sousuoInput{
+.sousuoInput {
   height: 48px;
   width: 564px;
   padding: 0;
   border: 0;
+  border: none !important;
+  -webkit-appearance: none;
+  background: transparent;
+  outline: none;
 }
-.sousuoInput:focus{
-  border: 0;
-}
-.sousuoBtn{
+.sousuoBtn {
   background-color: #ff8200;
   text-align: center;
   line-height: 48px;

@@ -1,6 +1,14 @@
 <template>
   <div class="headComponent">
     <wb_log class="wbLog"></wb_log>
+    <div class="searchWb">
+      <img
+        class="headSearchIcon"
+        @click="f_openInout"
+        src="../../../public/image/sousuo.svg"
+      />
+      <input type="text" class="headSearchInput" v-show="isClicked" />
+    </div>
     <button class="loginBtn" @click="methods.f_openLogin">登录</button>
     <loginModal @f-cancel="methods.fCancel" v-show="showLogin">
       <template v-slot:headTitle> 登录 </template>
@@ -17,7 +25,7 @@
 </template>
 <script setup>
 import { getCurrentInstance, ref, defineAsyncComponent } from "vue";
-import wb_log from './wb_log.vue'
+import wb_log from "./wb_log.vue";
 const loginModal = defineAsyncComponent(() => {
   return import("./wb_modal.vue");
 });
@@ -25,7 +33,9 @@ let sessionTimeOut = ref(false);
 let qrCodeUrl = ref("");
 let showLogin = ref(false);
 let getIntervalId = ref();
+
 let { proxy } = getCurrentInstance();
+
 const methods = {
   f_createQr: function () {
     proxy.$axios
@@ -63,6 +73,12 @@ const methods = {
     methods.f_createQr();
   },
 };
+
+//是否打开头部输入框
+let isClicked = ref(false);
+const f_openInout = function () {
+  isClicked.value = !isClicked.value;
+};
 </script>
 <style scoped lang="scss">
 .headComponent {
@@ -70,9 +86,32 @@ const methods = {
   background-color: white;
   display: flex;
   align-items: center;
-  .wbLog{
+  .wbLog {
     height: 100%;
-    width: 200px;
+    width: 10%;
+    padding: 0 30px;
+  }
+  .searchWb {
+    width: auto;
+    height: 32px;
+    border-radius: 16px;
+    background-color: #ddd;
+    padding-left: 8px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    .headSearchIcon {
+      width: 16px;
+      height: 16px;
+      padding-right: 8px;
+    }
+    .headSearchInput {
+      outline: none;
+      border: none;
+      height: 32px;
+      width: calc(100% - 32px);
+      background-color: transparent;
+    }
   }
   .loginBtn {
     width: 50px;
@@ -89,10 +128,9 @@ const methods = {
 .loginModal {
   width: 270px;
   height: auto;
-  
 }
-.loginModal >p {
-    text-align: center;
+.loginModal > p {
+  text-align: center;
 }
 .nosessionImg {
   width: 116px;
