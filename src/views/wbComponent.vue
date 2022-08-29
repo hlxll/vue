@@ -1,10 +1,11 @@
 <template>
   <div class="wbCom">
     <wbMain></wbMain>
-    <Transition name="head">
+
+    <Transition name="showHead">
       <wbHead v-show="scrollShow" class="wbHead"></wbHead>
     </Transition>
-    <wbTextItem :scrollShow="scrollShow"></wbTextItem>
+    <wbTextItem :scrollShow="scrollShow" ></wbTextItem>
   </div>
 </template>
 <script>
@@ -24,10 +25,11 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.f_scroll);
+    
   },
   methods: {
     f_scroll: function () {
-      if (window.scrollY >= 250) {
+      if (window.scrollY >= 290) {
         if (!this.scrollShow) {
           this.scrollShow = true;
         }
@@ -35,6 +37,7 @@ export default {
         this.scrollShow = false;
       }
     },
+    
   },
 };
 </script>
@@ -46,13 +49,23 @@ export default {
     top: 0;
   }
 
-.head-enter-active,
-.head-leave-active {
+.showHead-enter-active{
+  transition: transform 1s ease;
+}
+.showHead-leave-active {
   transition: transform 1s ease;
 }
 
-.head-enter-from,
-.head-leave-to {
+.showHead-enter-from{
+  transform: translateY(-100px);
+}
+.showHead-enter-to{
   transform: translateY(0px);
+}
+.showHead-leave-from{
+  transform: translateY(0px);
+}
+.showHead-leave-to {
+  transform: translateY(-100px);
 }
 </style>

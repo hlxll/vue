@@ -1,6 +1,7 @@
 <template>
   <div class="textMain" :style="{'min-height':(typeHeight.height+40)+'px'}">
     <wb_type_component 
+      @change-route="methods.changeRoute"
       :style="{'height':typeHeight.height+'px', 'position': (props.scrollShow)?'fixed':'static'}" 
       class="typeCom wbBgColor">
     </wb_type_component>
@@ -14,16 +15,17 @@ import wb_type_component from './wbTypeComponent.vue'
 import wb_mian_component from './wbMianComponent.vue'
 import wb_host_component from './wbHostComponent.vue'
 import { onMounted, reactive, defineProps, watch } from 'vue'
-
 const props = defineProps(['scrollShow'])
-
 
 
 const methods = {
   getTypeHeight: function (num) {
     let innerHeight = window.innerHeight;
     return innerHeight-num
-  }
+  },
+  changeRoute: function (to) {
+      console.log(to)
+    }
 }
 //左侧三个菜单的数据
 let typeHeight = reactive({
@@ -53,7 +55,7 @@ onMounted(() => {
 }
 .typeCom{
   width: 180px;
-  top: 40px;
+  top: 56px;
 }
 .typeCom2{
   width: 180px;

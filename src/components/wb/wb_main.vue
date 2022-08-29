@@ -27,6 +27,7 @@
 </template>
 <script>
 export default {
+  name: 'wbMain',
   data() {
     return {
       ws: "",

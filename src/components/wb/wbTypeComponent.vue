@@ -1,14 +1,19 @@
 <template>
     <div>
-        <div class="menuItem" v-for="item in tipList" :key="item">
+        <div class="menuItem" v-for="item in tipList" :key="item" @click="changeRoute(item)">
             <span class="wbIcon iconSize"></span><span>{{item}}</span>
         </div>
     </div>
 </template>
 <script setup>
-import { reactive } from "vue";
+import { reactive, defineEmits } from "vue";
 
 let tipList = ['热门微博', '热门榜单', '话题榜', '热搜榜']
+
+const emits = defineEmits(['changeRoute'])
+const changeRoute = function(item) { 
+    emits('changeRoute', item)
+}
 </script>
 <style scoped>
 .menuItem{

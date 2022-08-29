@@ -1,5 +1,6 @@
 <template>
   <div class="headComponent">
+    <wb_log class="wbLog"></wb_log>
     <button class="loginBtn" @click="methods.f_openLogin">登录</button>
     <loginModal @f-cancel="methods.fCancel" v-show="showLogin">
       <template v-slot:headTitle> 登录 </template>
@@ -16,6 +17,7 @@
 </template>
 <script setup>
 import { getCurrentInstance, ref, defineAsyncComponent } from "vue";
+import wb_log from './wb_log.vue'
 const loginModal = defineAsyncComponent(() => {
   return import("./wb_modal.vue");
 });
@@ -62,23 +64,28 @@ const methods = {
   },
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .headComponent {
-  height: 40px;
+  height: 57px;
   background-color: white;
   display: flex;
   align-items: center;
+  .wbLog{
+    height: 100%;
+    width: 200px;
+  }
+  .loginBtn {
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #ff8200;
+    color: white;
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+  }
 }
-.loginBtn {
-  width: 50px;
-  height: 30px;
-  line-height: 30px;
-  background-color: #ff8200;
-  color: white;
-  border: none;
-  padding: 0;
-  border-radius: 10px;
-}
+
 .loginModal {
   width: 270px;
   height: auto;
