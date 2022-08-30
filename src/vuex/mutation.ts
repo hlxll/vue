@@ -3,7 +3,12 @@
 
 export default {
     setCount(state: { count: number, todos: any[], name: string }, a: any) {
-        console.log(a)
         state.count++
+    },
+    setColor(state: { whiteAndBlock: boolean }, param: { whiteAndBlock: boolean }) {
+        state.whiteAndBlock = param.whiteAndBlock
+    },
+    setLogin(state: { isLogin: boolean }, param: { isLogin: boolean }) {
+        state.isLogin = param.isLogin
     }
 }

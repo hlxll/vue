@@ -44,13 +44,11 @@ onMounted(() => {
 .textMain {
   width: 100%;
   height: max-content;
-  background-color: #ddd;
   padding: 0 20px;
   box-sizing: border-box;
   display: flex;
 }
 .wbBgColor{
-  background-color: white;
   height: max-content;
 }
 .typeCom{

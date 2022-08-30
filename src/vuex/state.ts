@@ -11,5 +11,7 @@ export default {
         text: '...',
         done: false
     }
-    ]
+    ],
+    whiteAndBlock: true,
+    isLogin: false
 }

@@ -1,15 +1,26 @@
 <template>
-  <div class="headComponent">
+  <div class="headComponent" :class="props.allColor?'wb_white':'wb_black'">
     <wb_log class="wbLog"></wb_log>
-    <div class="searchWb">
+    <div class="searchWb" :style="{'background-color':props.allColor?'#ddd':'#333'}">
       <img
         class="headSearchIcon"
         @click="f_openInout"
         src="../../../public/image/sousuo.svg"
       />
-      <input type="text" class="headSearchInput" v-show="isClicked" />
+      <input type="text" class="headSearchInput" 
+        v-show="isClicked" />
+    </div>
+    <div class="headCenterRouteBtn" :style="{'margin-left':isClicked?'0px':'166px'}">
+      <div class="headRouteBtnItem" :class="item.active?'clickItem':''" 
+        @click="f_changeRoute(item)" v-for="item in routeBtns" :key="item.route">
+        <div class="headRouteBtnSmall">
+          <span class="headRouteBtnIcon iconfont icon-shenheguanli"
+            :style="{'color':item.active?'#f36126':''}"></span>
+        </div>
+      </div>
     </div>
     <button class="loginBtn" @click="methods.f_openLogin">登录</button>
+    
     <loginModal @f-cancel="methods.fCancel" v-show="showLogin">
       <template v-slot:headTitle> 登录 </template>
       <template v-slot:default>
@@ -21,11 +32,27 @@
         <div v-if="sessionTimeOut" class="nosessionImg">二维码已过期</div>
       </template>
     </loginModal>
+
+    <button class="register">注册</button>
+    <div class="searchWb">
+      <span v-show="showWhite"
+        @click="f_changeColor" class=" headSearchIcon iconfont icon-shi-quan-weikaishi"></span>
+      <span v-show="!showWhite"
+        @click="f_changeColor" class=" headSearchIcon iconfont icon-shi-quan-weikaishi"></span>
+    </div>
+    <div class="headRegister" @click="f_addWb()">
+      <span class="icon-shuru iconfont"></span>
+    </div>
   </div>
 </template>
 <script setup>
-import { getCurrentInstance, ref, defineAsyncComponent } from "vue";
+import { getCurrentInstance, ref, defineAsyncComponent, reactive, defineProps } from "vue";
+import { useStore } from 'vuex'
 import wb_log from "./wb_log.vue";
+const store = useStore()
+//设置全局颜色背景
+const props = defineProps(['allColor'])
+
 const loginModal = defineAsyncComponent(() => {
   return import("./wb_modal.vue");
 });
@@ -79,38 +106,114 @@ let isClicked = ref(false);
 const f_openInout = function () {
   isClicked.value = !isClicked.value;
 };
+
+
+//顶部中间路由跳转
+let routeBtns = reactive([{route: '1'}, {route: '2'}, {route: '3'}, {route: '4'}, {route: '5'}])
+
+
+//改变全局颜色
+let showWhite = ref(true)
+const f_changeColor = function () {
+  showWhite.value = !showWhite.value
+  store.commit('setColor', { whiteAndBlock: showWhite.value })
+}
+
+//切换顶部菜单
+const f_changeRoute = function (node) {
+  routeBtns.forEach(item => {
+    if (item.route == node.route) {
+      item.active = true
+    } else {
+      item.active = false
+    }
+  })
+}
+//添加微博
+const f_addWb = function () {
+  if (store.state.isLogin) {
+    console.log("跳转添加")
+  } else {
+    this.showLogin = true
+  }
+}
 </script>
 <style scoped lang="scss">
 .headComponent {
   height: 57px;
-  background-color: white;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #ddd;
   .wbLog {
     height: 100%;
     width: 10%;
     padding: 0 30px;
   }
   .searchWb {
-    width: auto;
-    height: 32px;
-    border-radius: 16px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
     background-color: #ddd;
-    padding-left: 8px;
+    border-radius: 15px;
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    justify-content: center;
     .headSearchIcon {
       width: 16px;
       height: 16px;
-      padding-right: 8px;
     }
     .headSearchInput {
+      background-color: transparent;
       outline: none;
       border: none;
       height: 32px;
       width: calc(100% - 32px);
-      background-color: transparent;
+    }
+    
+  }
+  .headRegister{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #f36126;
+    border-radius: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    span{
+      font-size: 14px;
+      margin-left: 3px;
+      color: white;
+    }
+  }
+  .headCenterRouteBtn{
+    display: flex;
+    width: 50%;
+    .headRouteBtnItem{
+      width: calc(20% - 40px);
+      height: 56px;
+      line-height: 56px;
+      text-align: center;
+      margin: 0 20px;
+      border-bottom: 2px solid transparent;
+      display: flex;
+      align-items: center;
+      .headRouteBtnSmall{
+        width: 70px;
+        height: 38px;
+        line-height: 38px;
+        margin: auto;
+        &:hover{
+          background-color: #ddd;
+        }
+        .headRouteBtnIcon{
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+    .clickItem{
+      border-bottom: 2px solid #f36126;
     }
   }
   .loginBtn {
@@ -122,6 +225,12 @@ const f_openInout = function () {
     border: none;
     padding: 0;
     border-radius: 10px;
+  }
+  .register{
+    border: none;
+    background: transparent;
+    color: #333;
+    margin-left: 5px;
   }
 }
 
