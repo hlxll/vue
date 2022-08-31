@@ -2,6 +2,7 @@
   <div style="position: relative">
     <div style="width: 100%; height: 330px; overflow: hidden">
       <video
+      loop="true"
         autoplay="true"
         src="https://a.sinaimg.cn/mintra/pic/2112130543/weibo_login.mp4"
         class="video"

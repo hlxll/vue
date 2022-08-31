@@ -1,21 +1,41 @@
 <template>
     <div>
-        <div class="menuItem" v-for="item in tipList" :key="item" @click="changeRoute(item)">
-            <span class="wbIcon iconSize"></span><span>{{item}}</span>
+        <div class="menuItem" v-for="item in tipList" :class="item.active?'isClicked':''"
+         :key="item.name" @click="changeRoute(item)">
+            <span class="wbIcon iconSize"></span>
+            <span>{{item.name}}</span>
         </div>
     </div>
 </template>
 <script setup>
-import { reactive, defineEmits } from "vue";
+import { reactive, defineEmits, nextTick } from "vue";
 
-let tipList = ['热门微博', '热门榜单', '话题榜', '热搜榜']
+let tipList = reactive([{
+    name: '热门微博',
+    active: false
+},{
+    name: '热门榜单',
+    active: false
+},{
+    name: '话题榜',
+    active: false
+},{
+    name: '热搜榜',
+    active: false
+}])
 
 const emits = defineEmits(['changeRoute'])
-const changeRoute = function(item) { 
+const changeRoute = function (item) { 
+    tipList.forEach(node => {
+        node.active = false
+        if (node.name == item.name) {
+            node.active = true
+        }
+    })
     emits('changeRoute', item)
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 .menuItem{
     height: 40px;
     line-height: 24px;
@@ -25,9 +45,13 @@ const changeRoute = function(item) {
     align-items: center;
     text-align: left;
     margin: 0 5px;
+    cursor: pointer;
+    &:hover{
+        background-color: rgba(242,242,242,.6);
+    }
 }
-.menuItem:hover{
-    background-color: #f2f2f2;
+.isClicked{
+    color: #eb7350;
 }
 .iconSize{
     width: 24px;

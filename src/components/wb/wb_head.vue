@@ -2,13 +2,17 @@
   <div class="headComponent" :class="props.allColor?'wb_white':'wb_black'">
     <wb_log class="wbLog"></wb_log>
     <div class="searchWb" :style="{'background-color':props.allColor?'#ddd':'#333'}">
-      <img
-        class="headSearchIcon"
+      <div class="headSearchIcon">
+        <img
         @click="f_openInout"
         src="../../../public/image/sousuo.svg"
       />
+      </div>
       <input type="text" class="headSearchInput" 
         v-show="isClicked" />
+      <div class="searchhistory">
+
+      </div>
     </div>
     <div class="headCenterRouteBtn" :style="{'margin-left':isClicked?'0px':'166px'}">
       <div class="headRouteBtnItem" :class="item.active?'clickItem':''" 
@@ -34,7 +38,7 @@
     </loginModal>
 
     <button class="register">注册</button>
-    <div class="searchWb">
+    <div class="searchWbZero">
       <span v-show="showWhite"
         @click="f_changeColor" class=" headSearchIcon iconfont icon-shi-quan-weikaishi"></span>
       <span v-show="!showWhite"
@@ -150,7 +154,7 @@ const f_addWb = function () {
     padding: 0 30px;
   }
   .searchWb {
-    width: 30px;
+    width: auto;
     height: 30px;
     text-align: center;
     background-color: #ddd;
@@ -158,9 +162,15 @@ const f_addWb = function () {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     .headSearchIcon {
-      width: 16px;
-      height: 16px;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      img{
+        width: 16px;
+        height: 16px;
+      }
     }
     .headSearchInput {
       background-color: transparent;
@@ -169,7 +179,25 @@ const f_addWb = function () {
       height: 32px;
       width: calc(100% - 32px);
     }
+    .searchhistory{
+      position: absolute;
+      top: 30px;
+      left: 0;
+      width: 150px;
+      height: 200px;
+    }
     
+  }
+  .searchWbZero {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background-color: #ddd;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
   }
   .headRegister{
     width: 30px;

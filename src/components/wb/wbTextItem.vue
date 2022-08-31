@@ -1,12 +1,17 @@
 <template>
-  <div class="textMain" :style="{'min-height':(typeHeight.height+40)+'px'}">
-    <wb_type_component 
-      @change-route="methods.changeRoute"
-      :style="{'height':typeHeight.height+'px', 'position': (props.scrollShow)?'fixed':'static'}" 
-      class="typeCom wbBgColor">
-    </wb_type_component>
-    <wb_mian_component style="width: calc(100% - 460px)" class="wbBgColor"></wb_mian_component>
-    <wb_host_component style="width: 280px;" class="wbBgColor"></wb_host_component>
+  <div class="textMain" :style="{'min-height':(typeHeight.height+40)+'px', 'background-color':allColor?'#ddd':'black'}">
+      <wb_type_component 
+        :class="allColor?'wb_white':'wb_black'"
+        @change-route="methods.changeRoute"
+        :style="{'height':typeHeight.height+'px', 'position': (props.scrollShow)?'fixed':'static'}" 
+        class="typeCom wbBgColor">
+      </wb_type_component>
+      <wb_mian_component
+        :class="allColor?'wb_white':'wb_black'"
+        style="width: calc(100% - 460px)" class="wbBgColor"></wb_mian_component>
+      <wb_host_component 
+        :class="allColor?'wb_white':'wb_black'"
+        style="width: 280px;" class="wbBgColor"></wb_host_component>
   </div>
 </template>
 
@@ -14,10 +19,17 @@
 import wb_type_component from './wbTypeComponent.vue'
 import wb_mian_component from './wbMianComponent.vue'
 import wb_host_component from './wbHostComponent.vue'
-import { onMounted, reactive, defineProps, watch } from 'vue'
+import { onMounted, reactive, defineProps, watch, computed } from 'vue'
+import { useStore } from 'vuex';
 const props = defineProps(['scrollShow'])
 
 
+
+const allColor = computed(() => {
+  const store = useStore()
+  return store.state.whiteAndBlock
+})
+  
 const methods = {
   getTypeHeight: function (num) {
     let innerHeight = window.innerHeight;
