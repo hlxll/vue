@@ -1,30 +1,26 @@
 <template>
   <div class="headComponent" :class="props.allColor?'wb_white':'wb_black'">
-    <wb_log class="wbLog"></wb_log>
+    <wb_log class="wbLog" :logSize="30"></wb_log>
     <div class="searchWb" :style="{'background-color':props.allColor?'#ddd':'#333'}">
       <div class="headSearchIcon">
-        <img
-        @click="f_openInout"
-        src="../../../public/image/sousuo.svg"
-      />
+        <span @click="f_openInout" class="iconfont icon-sousuo1"></span>
       </div>
-      <input type="text" class="headSearchInput" 
-        v-show="isClicked" />
-      <div class="searchhistory">
+      <input type="text" class="headSearchInput" v-show="isClicked" />
+      <div class="searchhistory" v-show="isClicked">
 
       </div>
     </div>
-    <div class="headCenterRouteBtn" :style="{'margin-left':isClicked?'0px':'166px'}">
-      <div class="headRouteBtnItem" :class="item.active?'clickItem':''" 
-        @click="f_changeRoute(item)" v-for="item in routeBtns" :key="item.route">
+    <div class="headCenterRouteBtn" :style="{'margin-left':isClicked?'-20px':'146px'}">
+      <div class="headRouteBtnItem" :class="item.active?'clickItem':''" @click="f_changeRoute(item)"
+        v-for="item in routeBtns" :key="item.route">
         <div class="headRouteBtnSmall">
-          <span class="headRouteBtnIcon iconfont icon-shenheguanli"
+          <span class="headRouteBtnIcon iconfont" :class="item.class"
             :style="{'color':item.active?'#f36126':''}"></span>
         </div>
       </div>
     </div>
     <button class="loginBtn" @click="methods.f_openLogin">登录</button>
-    
+
     <loginModal @f-cancel="methods.fCancel" v-show="showLogin">
       <template v-slot:headTitle> 登录 </template>
       <template v-slot:default>
@@ -39,10 +35,8 @@
 
     <button class="register">注册</button>
     <div class="searchWbZero">
-      <span v-show="showWhite"
-        @click="f_changeColor" class=" headSearchIcon iconfont icon-shi-quan-weikaishi"></span>
-      <span v-show="!showWhite"
-        @click="f_changeColor" class=" headSearchIcon iconfont icon-shi-quan-weikaishi"></span>
+      <span v-show="showWhite" @click="f_changeColor" class=" headSearchIcon iconfont icon-shi-quan-weikaishi"></span>
+      <span v-show="!showWhite" @click="f_changeColor" class=" headSearchIcon iconfont icon-shi-quan-weikaishi"></span>
     </div>
     <div class="headRegister" @click="f_addWb()">
       <span class="icon-shuru iconfont"></span>
@@ -113,7 +107,8 @@ const f_openInout = function () {
 
 
 //顶部中间路由跳转
-let routeBtns = reactive([{route: '1'}, {route: '2'}, {route: '3'}, {route: '4'}, {route: '5'}])
+let routeBtns = reactive([{ route: '1', class: 'icon-shouye' }, { route: '2', class: 'icon-shipin1' },
+  { route: '3', class: 'icon-rocket' }, { route: '4', class: 'icon-xiaoxitongzhi' }, { route: '5', class: 'icon-gerenxinxi' }])
 
 
 //改变全局颜色
@@ -143,6 +138,10 @@ const f_addWb = function () {
 }
 </script>
 <style scoped lang="scss">
+
+
+
+
 .headComponent {
   height: 57px;
   display: flex;
@@ -150,8 +149,7 @@ const f_addWb = function () {
   border-bottom: 1px solid #ddd;
   .wbLog {
     height: 100%;
-    width: 10%;
-    padding: 0 30px;
+    padding-left: 30px;
   }
   .searchWb {
     width: auto;
@@ -189,15 +187,14 @@ const f_addWb = function () {
     
   }
   .searchWbZero {
+    cursor: pointer;
     width: 30px;
     height: 30px;
+    line-height: 30px;
     text-align: center;
     background-color: #ddd;
     border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    margin-left: 10px;
   }
   .headRegister{
     width: 30px;
@@ -206,7 +203,7 @@ const f_addWb = function () {
     text-align: center;
     background-color: #f36126;
     border-radius: 15px;
-    margin-left: 10px;
+    margin-left: 20px;
     cursor: pointer;
     span{
       font-size: 14px;
@@ -235,8 +232,7 @@ const f_addWb = function () {
           background-color: #ddd;
         }
         .headRouteBtnIcon{
-          width: 30px;
-          height: 30px;
+          font-size: 30px;
         }
       }
     }
@@ -245,6 +241,7 @@ const f_addWb = function () {
     }
   }
   .loginBtn {
+    cursor: pointer;
     width: 50px;
     height: 30px;
     line-height: 30px;
@@ -255,6 +252,7 @@ const f_addWb = function () {
     border-radius: 10px;
   }
   .register{
+    cursor: pointer;
     border: none;
     background: transparent;
     color: #333;

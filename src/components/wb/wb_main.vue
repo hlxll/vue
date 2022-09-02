@@ -2,10 +2,10 @@
   <div style="position: relative">
     <div style="width: 100%; height: 330px; overflow: hidden">
       <video
-      loop="true"
         autoplay="true"
         src="https://a.sinaimg.cn/mintra/pic/2112130543/weibo_login.mp4"
         class="video"
+        id="video"
       ></video>
     </div>
     <div class="videoText">
@@ -14,7 +14,7 @@
       </div>
       <div
         class="videoInput"
-        :style="{ border: focus ? '1px solid #ff8200' : '0' }"
+        :style="{ border: focus ? '1px solid #ff8200' : '1px solid transparent' }"
       >
         <div class="sousuoIcon">
           <img src="../../../public/image/sousuo.svg" />
@@ -52,15 +52,25 @@ export default {
     },
   },
   mounted() {
-    this.ws = new WebSocket("ws://127.0.0.1:5000");
-    this.ws.onopen = (e) => {
-      this.ws.send(this.$route.query.user);
-    };
-    this.ws.onmessage = (e) => {
-      console.log(e);
-    };
+    try {
+      //对于视频的设置
+      let videoState = document.getElementById('video')
+      videoState.loop = true
+      //推送数据
+      this.ws = new WebSocket("ws://127.0.0.1:5000");
+      this.ws.onopen = (e) => {
+        this.ws.send(this.$route.query.user);
+      };
+      this.ws.onmessage = (e) => {
+        console.log(e);
+      }; 
+    } catch (err) {
+      console.log(err)
+    }
+    
   },
 };
+
 </script>
 <style scoped>
 .video {

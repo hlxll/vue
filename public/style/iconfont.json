@@ -6,6 +6,62 @@
   "description": "SEE1.0",
   "glyphs": [
     {
+      "icon_id": "1360",
+      "name": "新浪微博",
+      "font_class": "xinlangweibo",
+      "unicode": "ea82",
+      "unicode_decimal": 60034
+    },
+    {
+      "icon_id": "629343",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "ea83",
+      "unicode_decimal": 60035
+    },
+    {
+      "icon_id": "2901897",
+      "name": "视频",
+      "font_class": "shipin1",
+      "unicode": "ea84",
+      "unicode_decimal": 60036
+    },
+    {
+      "icon_id": "5767876",
+      "name": "消息通知",
+      "font_class": "xiaoxitongzhi",
+      "unicode": "ec35",
+      "unicode_decimal": 60469
+    },
+    {
+      "icon_id": "6844390",
+      "name": "个人信息",
+      "font_class": "gerenxinxi",
+      "unicode": "ea85",
+      "unicode_decimal": 60037
+    },
+    {
+      "icon_id": "145451",
+      "name": "视频",
+      "font_class": "shipin",
+      "unicode": "ea7f",
+      "unicode_decimal": 60031
+    },
+    {
+      "icon_id": "31285278",
+      "name": "播放 线性",
+      "font_class": "a-bofangxianxing",
+      "unicode": "ea80",
+      "unicode_decimal": 60032
+    },
+    {
+      "icon_id": "31425974",
+      "name": "搜索",
+      "font_class": "sousuo1",
+      "unicode": "ea81",
+      "unicode_decimal": 60033
+    },
+    {
       "icon_id": "31515432",
       "name": "部分显示",
       "font_class": "bufenxianshi",

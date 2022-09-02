@@ -1,17 +1,14 @@
 <template>
   <div class="textMain" :style="{'min-height':(typeHeight.height+40)+'px', 'background-color':allColor?'#ddd':'black'}">
-      <wb_type_component 
-        :class="allColor?'wb_white':'wb_black'"
-        @change-route="methods.changeRoute"
-        :style="{'height':typeHeight.height+'px', 'position': (props.scrollShow)?'fixed':'static'}" 
-        class="typeCom wbBgColor">
-      </wb_type_component>
-      <wb_mian_component
-        :class="allColor?'wb_white':'wb_black'"
-        style="width: calc(100% - 460px)" class="wbBgColor"></wb_mian_component>
-      <wb_host_component 
-        :class="allColor?'wb_white':'wb_black'"
-        style="width: 280px;" class="wbBgColor"></wb_host_component>
+    <wb_type_component :class="allColor?'wb_white':'wb_black'" @change-route="methods.changeRoute"
+      :style="{'height':typeHeight.height+'px', 'position': (props.scrollShow)?'fixed':'static'}"
+      class="typeCom wbBgColor">
+    </wb_type_component>
+    <wb_mian_component :class="allColor?'wb_white':'wb_black'"
+      :style="{'margin-left': (props.scrollShow)?'190px':'10px'}"
+      style="width: calc(100% - 460px)" class="wbBgColor"></wb_mian_component>
+    <wb_host_component :class="allColor?'wb_white':'wb_black'" style="width: 270px;margin-left: 10px;" class="wbBgColor">
+    </wb_host_component>
   </div>
 </template>
 
@@ -62,14 +59,14 @@ onMounted(() => {
 }
 .wbBgColor{
   height: max-content;
+  margin-top: 10px;
 }
 .typeCom{
   width: 180px;
-  top: 56px;
+  top: 46px;
 }
 .typeCom2{
   width: 180px;
   position: fixed;
-  
 }
 </style>
