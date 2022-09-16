@@ -8,7 +8,7 @@
         原理：就是props传递数据一样，template是slot的子组件一样
       -->
       <template v-slot:default="slotProps">
-        <span>{{ slotProps.item }}</span>
+        <p>作用域插槽传递数据{{ slotProps.item }}</p>
       </template>
       <template #suoxie="slotProps">
         <br />

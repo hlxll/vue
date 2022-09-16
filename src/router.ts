@@ -7,6 +7,8 @@ import LoginB from "./components/Login/child/loginB.vue";
 import wbComponent from "./views/wbComponent.vue";
 
 import SlotVue from "./components/slot/slotIndex.vue";
+
+import SetupScript from './components/apiSetup/setupScript.vue'
 import { createRouter, createWebHashHistory } from "vue-router";
 //hash模式只改变#后面的，不会传入服务器，但是对SEO不友好，history不会
 const routeList = [
@@ -44,6 +46,10 @@ const routeList = [
     //加一个 + 表示这个参数可以重复出现多次，如果是 * 表示可以0或多次 ？表示0或1个
     path: "/slot/:slot+",
     component: SlotVue,
+  },
+  {
+    path: '/setup/script',
+    component: SetupScript,
   },
   {
     //路由学习主要界面

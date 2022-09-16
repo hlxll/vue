@@ -12,20 +12,28 @@
     <button @click="changeRep()">改变</button>
 
     <AsyncComponent v-on:close="changeAsync" v-if="showAsync" />
-
-    <!-- 混入其他组件数据 -->
-
+    <p>高阶异步组件</p>
+    <hostAsyncComponent></hostAsyncComponent>
+    
     <span v-myDirective="'huanglin'">混入：{{ mergeChild }}</span>
 
     <p>provide和inject{{ user }}</p>
     <p>{{value}}</p>
-  </div>
+    <p>definecomponent组件创建</p>
+    <DefineComponent></DefineComponent>
+    
+    <p style="text-align: center;">setup组合式API学习</p>
+    <SetupCom></SetupCom>
+</div>
 </template>
 
 <script>
-import { onMounted, provide, reactive, readonly, ref, watch } from "vue";
-// import axios from "axios";
-import Provide from "../components/Provide.vue";
+import { onMounted, provide, reactive, readonly, ref, watch} from "vue";
+import axios from "axios";
+import DefineComponent from "@/components/defineComponent/defineComponent.vue";
+import SetupCom from "@/components/apiSetup/setupCom.vue";
+
+
 export default {
   //有name，对于出错有更详细的提示，使用devtools的时候，未命名组件是显示其他的，有name就会很有语意，找路径方便
   name: "App",
@@ -38,7 +46,7 @@ export default {
     console.log({ key, target, type });
   },
   beforeCreate() {
-    this.axios
+    axios
       .request({
         url: "www.baidu.com"
       })
@@ -55,10 +63,9 @@ export default {
     };
   },
   components: {
-    // AsyncComponent: defineAsyncComponent(() =>
-    //   import("./components/AsyncComponent.vue")
-    // )
-  },
+    DefineComponent,
+    SetupCom
+},
   setup() {
     //provider为了响应式，可以将数据使用ref或者reactive定义
     const location = ref("north");
@@ -96,18 +103,17 @@ export default {
     setHttp() {
       var encodeStr = encodeURI("www.baidu.com");
       var base = btoa("www.baidu.com");
-      console.log(base);
       // 对base64转编码
       var decode = atob(base);
       // 编码转字符串
       var str = decodeURI(decode);
-      console.log(str);
     },
     changeRep() {
+      console.log(this.componentName)
       this.reposituries = "新ref函数创建响应式变量，可以在任何地方使用";
       //迫使组件实例重新渲染，仅仅组件本身和有插入插槽内容的子组件，不是所有子组件
-      this.$forceUpdate();
-      //和在seetup中使用的全局nextTick一样，只是this挂载到调用的实例上
+    this.$forceUpdate();
+// 和在seetup中使用的全局nextTick一样，只是this挂载到调用的实例上
       this.$nextTick(() => {
         console.log("下次DOM渲染前执行");
       });
@@ -116,13 +122,6 @@ export default {
       this.showAsync = !this.showAsync;
     }
   }
-};
+}
+
 </script>
-
-<script setup>
-//这个script响应式状态需要明确使用响应式API，例如ref，reactive创建,不用导出，变量和方法可以直接使用
-</script>
-
-<style>
-</style>
-

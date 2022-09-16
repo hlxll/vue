@@ -26,7 +26,6 @@ export default defineComponent({
      * 但是如果object也是代理的响应式数据，就可以使用object.proxy了
      */
     let count = ref(0);
-    console.log(count);
     let { slots, attrs, expose } = context;
     //expose向父组件暴露数据，暴露实例，正常使用ref，parent，$root等获取的实例是等同于模板的实例，expose可以创建一个独立的实例
     expose({});
