@@ -41,8 +41,6 @@ export default defineComponent({
   },
   setup(props, context) {
     //setup实在组件实例之前调用的，所以内部this和其他选项API的this不同
-
-
     const propData = toRefs(props);
     let { attrs, slots, emit, expose } = context;
     nextTick(() => {

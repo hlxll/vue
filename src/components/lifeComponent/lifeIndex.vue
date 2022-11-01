@@ -32,6 +32,10 @@ export default defineComponent({
   //和renderTracked返回一样，在重新渲染虚拟dom被触发时调用。就是有方法修改界面时触发
   renderTriggered() {
     console.log("triggerer");
+  },
+  //拦截后代组件的错误
+  errorCaptured(...args) {
+    console.error(args)
   }
 });
 </script>

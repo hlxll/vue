@@ -2,7 +2,10 @@
   <div style="position: relative">
     <div style="width: 100%; height: 330px; overflow: hidden">
       <video
-        autoplay="true"
+        autoplay='autoplay'
+        loop="loop"
+        preload="true"
+        muted="muted"
         src="https://a.sinaimg.cn/mintra/pic/2112130543/weibo_login.mp4"
         class="video"
         id="video"
@@ -25,7 +28,7 @@
           @focusout="f_inputFocus(false)"
           @focusin="f_inputFocus(true)"
         />
-        <button class="sousuoBtn">搜索</button>
+        <button class="sousuoBtn" @click="f_pushMsg()">搜索</button>
       </div>
     </div>
   </div>
@@ -45,7 +48,7 @@ export default {
   },
   methods: {
     f_pushMsg: function () {
-      this.ws.send("我是" + this.$route.query.user);
+      this.ws.send("我是"+this.$route.query.user);
     },
     f_inputFocus: function (event) {
       this.focus = event;
@@ -53,9 +56,6 @@ export default {
   },
   mounted() {
     try {
-      //对于视频的设置
-      let videoState = document.getElementById('video')
-      videoState.loop = true
       //推送数据
       this.ws = new WebSocket("ws://127.0.0.1:5000");
       this.ws.onopen = (e) => {

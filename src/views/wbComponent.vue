@@ -1,7 +1,12 @@
 <template>
   <div class="wbCom" :class="allColor?'wb_white':'wb_black'">
     <wbMain></wbMain>
-    <wbTextItem :scrollShow="scrollShow" ></wbTextItem>
+    <Suspense :timeout="susTimeFun" @pending="susPend()" @resolve="susResol()" @fallback="susFall()">
+      <wbTextItem :scrollShow="scrollShow"></wbTextItem>
+      <template #fallback>
+        加载中
+      </template>
+    </Suspense>
     <Transition name="showHead">
       <wbHead v-show="scrollShow"  class="wbHead" :allColor="allColor"></wbHead>
     </Transition>
@@ -10,18 +15,25 @@
 <script>
 import wbMain from "../components/wb/wb_main.vue";
 import wbHead from "../components/wb/wb_head.vue";
-import wbTextItem from "../components/wb/wbTextItem.vue";
+import {defineAsyncComponent} from "vue"
 import { useStore } from 'vuex'
-
 export default {
   components: {
     wbMain,
     wbHead,
-    wbTextItem,
+    wbTextItem: defineAsyncComponent({
+      loader: () => {
+        console.log(defineAsyncComponent)
+        return import('../components/wb/wbTextItem.vue')
+      },
+      delay: 100,
+      timeout: 10000
+    })
   },
   data() {
     return {
       scrollShow: false,
+      susTimeFun: 6000
     };
   },
   mounted() {
@@ -36,7 +48,16 @@ export default {
       } else {
         this.scrollShow = false;
       }
-    }
+    },
+    susPend: function () { 
+      console.log(1)
+    },
+    susResol: function () { 
+      console.log(2)
+    },
+    susFall: function () { 
+      console.log(3)
+    },
   },
   computed: {
     allColor: function () {
