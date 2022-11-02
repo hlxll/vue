@@ -1,5 +1,5 @@
 <template>
-  <div class="wbCom" :class="allColor?'wb_white':'wb_black'">
+  <div class="wbCom" :class="allColor ? 'wb_white' : 'wb_black'">
     <wbMain></wbMain>
     <Suspense :timeout="susTimeFun" @pending="susPend()" @resolve="susResol()" @fallback="susFall()">
       <wbTextItem :scrollShow="scrollShow"></wbTextItem>
@@ -8,14 +8,16 @@
       </template>
     </Suspense>
     <Transition name="showHead">
-      <wbHead v-show="scrollShow"  class="wbHead" :allColor="allColor"></wbHead>
+      <wbHead v-show="scrollShow" class="wbHead" :allColor="allColor"></wbHead>
     </Transition>
   </div>
 </template>
 <script>
 import wbMain from "../components/wb/wb_main.vue";
 import wbHead from "../components/wb/wb_head.vue";
-import {defineAsyncComponent} from "vue"
+import eventBus from '../eventBus/index'
+
+import { defineAsyncComponent } from "vue"
 import { useStore } from 'vuex'
 export default {
   components: {
@@ -49,13 +51,13 @@ export default {
         this.scrollShow = false;
       }
     },
-    susPend: function () { 
+    susPend: function () {
       console.log(1)
     },
-    susResol: function () { 
+    susResol: function () {
       console.log(2)
     },
-    susFall: function () { 
+    susFall: function () {
       console.log(3)
     },
   },
@@ -68,37 +70,43 @@ export default {
 };
 </script>
 <style>
-.wb_white{
+.wb_white {
   background-color: white;
   color: black;
 }
-.wb_black{
+
+.wb_black {
   background-color: black;
   color: white;
 }
+
 .wbHead {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
 }
 
-.showHead-enter-active{
+.showHead-enter-active {
   transition: transform 1s ease;
 }
+
 .showHead-leave-active {
   transition: transform 1s ease;
 }
 
-.showHead-enter-from{
+.showHead-enter-from {
   transform: translateY(-100px);
 }
-.showHead-enter-to{
+
+.showHead-enter-to {
   transform: translateY(0px);
 }
-.showHead-leave-from{
+
+.showHead-leave-from {
   transform: translateY(0px);
 }
+
 .showHead-leave-to {
   transform: translateY(-100px);
 }

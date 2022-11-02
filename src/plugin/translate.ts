@@ -8,8 +8,6 @@
 //     }
 // }
 export default (app: any, params: any) => {
-    console.log(app);
-    console.log(params);
     app.config.globalProperties.$translate = () => {
         return '翻译文字'
     }

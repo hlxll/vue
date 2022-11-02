@@ -22,7 +22,7 @@
                 <i style="color: #f26d5f;margin-right: 5px;float: left;" v-if="item.num">{{ item.num }}</i>
                 <i class="iconfont icon-circle2" style="color: #f26d5f;float: left;margin-right: 5px;font-size: 4px;"
                     v-if="!item.num"></i>
-                <span class="r_top10_item_name">{{ item.name }}</span>
+                <span class="r_top10_item_name" :title="item.name">{{ item.name }}</span>
                 <span class="r_top10_item_sum" :title="changeNumType(item.sum)">{{ changeNumType(item.sum) }}</span>
                 <div class="r_top10_hot_newType">{{ item.hotType }}</div>
             </div>
@@ -40,10 +40,15 @@ export default {
             top10: [
                 {
                     num: 1,
-                    name: '江南不要再写了',
-                    sum: 1199000000000,
+                    name: '江南不要再写了ssssssasdasd',
+                    sum: 119900000,
                     hotType: '热'
-                }
+                },
+                {
+                    name: '江南不要再写了ssssssasdasd',
+                    sum: 119900000,
+                    hotType: '商'
+                },
             ]
         }
     },
@@ -176,6 +181,7 @@ export default {
             display: inline-block;
             font-size: 12px;
             max-width: 50px;
+            color: #939393;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;

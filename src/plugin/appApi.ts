@@ -1,5 +1,4 @@
 import { h, resolveDynamicComponent } from "vue";
-
 export default (app: any, param: any) => {
 
 
@@ -14,7 +13,6 @@ export default (app: any, param: any) => {
     console.log('vue运行时的警告，只在开发环境有效');
   }
   app.config.globalProperties.foo = '全局属性'
-
   //为使用mixin时候，组件数据合并的策略,默认合并策略是看child存在否，存在就使用child的，不存在就使用parent的
   // 如果有多个生命周期钩子，则直接合并成数组并返回。
   // 如果父组件和子组件都设置了钩子函数选项，那么 它们会合并到一个数组里，而且父组件的钩子函数会先执行，最后返回一个合并后的数组。

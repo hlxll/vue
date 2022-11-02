@@ -1,11 +1,13 @@
 <template>
-  <div class="textMain" :style="{ 'min-height': (typeHeight.height + 40) + 'px', 'background-color': allColor ? '#ddd' : 'black' }">
+  <div class="textMain"
+    :style="{ 'min-height': (typeHeight.height + 40) + 'px', 'background-color': allColor ? '#ddd' : 'black' }">
     <wb_type_component :class="allColor ? 'wb_white' : 'wb_black'" @change-route="methods.changeRoute"
       :style="{ 'height': typeHeight.height + 'px', 'position': (props.scrollShow) ? 'fixed' : 'static' }"
       class="typeCom wbBgColor">
     </wb_type_component>
     <wb_mian_component :class="allColor ? 'wb_white' : 'wb_black'"
-      :style="{ 'margin-left': (props.scrollShow) ? '190px' : '10px' }" style="width: calc(100% - 460px)" class="wbBgColor">
+      :style="{ 'margin-left': (props.scrollShow) ? '190px' : '10px' }" style="width: calc(100% - 460px)"
+      class="wbBgColor">
     </wb_mian_component>
     <wb_host_component :color="allColor" style="width: 270px;margin-left: 10px;" class="wbBgColor">
     </wb_host_component>
@@ -46,8 +48,6 @@ let typeHeight = reactive({
 onMounted(() => {
   typeHeight.height = methods.getTypeHeight(40) + 100
 })
-
-
 </script>
 <style>
 .textMain {

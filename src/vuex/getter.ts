@@ -1,4 +1,3 @@
-import { ColorPicker } from "element-ui"
 
 //state派生出来的一下经过处理的状态
 export default {
